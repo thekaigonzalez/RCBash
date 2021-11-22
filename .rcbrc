@@ -1,0 +1,21 @@
+# this is the file containing basic types
+
+# the prompt
+set ps1 "[ rcsh ] $ "
+
+# help command
+set help `printf "there are not any help commands.\nYou can learn about the RCSH in the README.\n"`
+
+# default shell (set)
+set shell /bin/bash
+
+# z shell
+set zshell /bin/zsh
+
+# printf "hello\n"
+
+# UNCOMMENT TO SET BASH AS DEFAULT SHELL!!!
+# set default /bin/bash
+
+# UNCOMMENT TO SET ZSH AS DEFAULT SHELL!!!
+# set default /bin/zsh

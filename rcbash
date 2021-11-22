@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+# for bash users
+
+# just ./rcbash
+
+python3 RCBash.py
