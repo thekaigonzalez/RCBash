@@ -16,6 +16,8 @@
 import RCScript.RCEval as evaluate
 import readline
 import os
+import sys
+import time
 import datetime
 import pathlib
 
@@ -28,6 +30,15 @@ def bmain():
     if evaluate.uservars.get('default') != None:
         evaluate.subprocess.call(evaluate.uservars['default'])
     if not pathlib.Path("./.first_time_login").exists():
+        animation = ['/', '-', '\\']
+
+        for i in range(10):
+            
+            time.sleep(0.1)
+            sys.stdout.write("loading .... ")
+            sys.stdout.flush()
+            sys.stdout.write(animation[i % len(animation)] + "\r")
+            sys.stdout.flush()
         print("Welcome to RCBash!\nTo get started, you can use bash instead of the default terminal by\ntyping 'bash' if you have bash installed.")
         print("""
 The next step is to Learn Your OS.
