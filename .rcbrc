@@ -6,7 +6,7 @@ set neofetc
 set ps1 "[ rcsh ] $ "
 
 # help command
-set help `printf "there are not any help commands.\nYou can learn about the RCSH in the README.\n"`
+set help `printf "there are not any help commands.\nYou can learn about the RCSH in the README.\nWe've set the default PS1 to [ rcsh ] #"`
 
 # default shell (set)
 set shell /bin/bash
