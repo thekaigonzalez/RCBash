@@ -37,3 +37,5 @@ it basically tells you how to set a default shell and tells you how to use bash.
 
 If the default shell isn't enough (like you need expressions, comparisons, files, etc ...) you can
 use the bash or zshell.
+
+H. If statement

@@ -1,5 +1,7 @@
 # RCLexer
 
+uservars = {}
+
 def dictionary_ofrc(stri):
     state = 0
 
@@ -10,7 +12,7 @@ def dictionary_ofrc(stri):
     buffer = ""
 
     i = 0
-
+    get = ""
     stat_level = 0
     for char in stri:
         
@@ -20,8 +22,33 @@ def dictionary_ofrc(stri):
             state = 10
         elif (char == '`' and state == 10 and stri[i-1] != '\\'):
             state = 1010
+        elif stri[i] == '$' and state == 1010:
+            state = 999
+        elif state == 999 and stri[i] == ' ':
+            # print(get)
+            if uservars.get(get) != None:
+                get = uservars[get]
+            get = str(get)
+            # print(get)
+            buffer += str(get)
+            get = ""
+            state = 1010
+            buffer += stri[i]
+        elif state == 999 and stri[i] == '`':
+            # space = ""
+
+            # for _ in range(i):
+            #     space += " "
+            # print("error: unexpected token '`' at position " + str(i) + "\n1 | " + stri + "\n" + space + "^")
+            continue
+        elif state == 999 and stri[i] != '`':
+            get += stri[i]
         elif char == '`' and state == 1010 and stri[i-1] != '\\':
             state = 10
+        elif char == '{' and state == 10:
+            state = 777
+        elif char == '\n' and state == 777:
+            print(buffer)
         elif char == ' ' and state == 0:
             if len(buffer) > 0:
                 
@@ -52,6 +79,17 @@ def dictionary_ofrc(stri):
         else:
             buffer += char
         i += 1
+    if len(get) > 0:
+        # print("left var")
+        # print(get)
+        # print(": " + buffer)
+        # print(get)
+        # print(buffer)
+        get = str(eval(get))
+        # print(get)
+        buffer += str(get)
+
+        args.append(buffer)
     if len(buffer) > 0 and state == 10:
         args.append(buffer)
     if len(args) > 0 and state != 0:
@@ -60,6 +98,7 @@ def dictionary_ofrc(stri):
     if len(buffer) > 0 and state == 0:
         stat_dict[stat_level] = {}
         stat_dict[stat_level]['args'] = [buffer.strip()]
+    # print(stat_dict)
     # print(args[1])
     # print(stat_dict)
 

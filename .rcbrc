@@ -1,5 +1,7 @@
 # this is the file containing basic types
 
+set neofetc
+
 # the prompt
 set ps1 "[ rcsh ] $ "
 

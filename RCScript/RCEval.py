@@ -17,7 +17,7 @@ import RCScript.RCLexer as lexer
 import subprocess
 import os
 
-uservars = {}
+uservars = lexer.uservars
 
 def eval_rc(code):
     ast = lexer.dictionary_ofrc(code)
@@ -48,11 +48,24 @@ def eval_rc(code):
             elif arg[0] == 'cd':
                 if (len(arg) > 1):
                     os.chdir(arg[1])
+            elif arg[0] == 'cmpare':
+                if (len(arg) >= 4):
+                    print("good " + arg[1])
+                    if uservars.get(arg[1]) != None:
+                        print("good")
+                        if uservars[arg[1]] == arg[2]:
+                            # print("done")
+                            eval_rc(arg[3])
+            elif arg[0] == 'pwd':
+                
+                built = True
+
+                return os.getcwd()
             if uservars.get(arg[0].strip()) != None:
                 eval_rc(uservars[arg[0]])
                 break;
             if not built:
                 try:
-                    subprocess.call(arg)
+                    return subprocess.call(arg)
                 except Exception as e:
                     print("error: rcbash: command not found: " + str(e))
