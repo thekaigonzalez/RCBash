@@ -7,7 +7,7 @@ set nf `bash -c "neofetch"`
 set ps1 "[ rcsh ] $ "
 
 # Agent (REQUIRED)
-set agent "sandBOX"
+set agent "User"
 
 # help command
 set help `printf "there are not any help commands.\nYou can learn about the RCSH in the README.\nWe've set the default PS1 to [ rcsh ] #"`
