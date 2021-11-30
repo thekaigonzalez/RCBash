@@ -52,7 +52,7 @@ You can choose different default shells and more in the .rcbrc file. RCBash Is y
         open("./.first_time_login", "w").close()
     while True:
         try:
-            inp = input(evaluate.uservars['ps1'] if evaluate.uservars['ps1'] != None else '[ bash ] $')
+            inp = input((evaluate.uservars['agent'] if evaluate.uservars['agent'] != None else "agent") + " at " + evaluate.uservars['ps1'] if evaluate.uservars['ps1'] != None else '[ bash ] $')
 
             evaluate.eval_rc(inp)
         except EOFError:

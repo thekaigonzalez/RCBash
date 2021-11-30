@@ -1,9 +1,13 @@
 # this is the file containing basic types
 
-set neofetc
+# alias to neofetch
+set nf `bash -c "neofetch"`
 
 # the prompt
 set ps1 "[ rcsh ] $ "
+
+# Agent (REQUIRED)
+set agent "sandBOX"
 
 # help command
 set help `printf "there are not any help commands.\nYou can learn about the RCSH in the README.\nWe've set the default PS1 to [ rcsh ] #"`
@@ -11,8 +15,13 @@ set help `printf "there are not any help commands.\nYou can learn about the RCSH
 # default shell (set)
 set shell /bin/bash
 
+set secure_warnings no
+
 # z shell
 set zshell /bin/zsh
+
+# uncomment to enable warnings (if someone's trying to cd into /usr, anything with /system, etc ...) (RECOMMENDED)
+#set secure_warnings "yes"
 
 # printf "hello\n"
 

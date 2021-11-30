@@ -1,41 +1,26 @@
-RC is a separately branched fork of the RCP CLI.
+                                                 RCBash for KTerminal Developers
 
-H. Strings (1.0)
+                                    RCBash is a high-level command processor written in Python, made
+                                    for safety, and reliability.
 
-Strings have two different characters for a reason.
+                                    This version of RCBash contains security features, and bug fixes.
 
-the quote (") is for basic strings, contains escapes, and allows long manipulation.
+                                    It also contains some ports of KTerminal commands, like xxd, cat, and
+                                    rd.
 
-the italic (`) is for complex strings, it contains everything like the quote, except it
-supports the use of the quote inside of it, and it wont be recognized.
+                                    When using RCBash, you can use "set" to add variables.
 
-H. Scripts
+                                    like
+                                        `
 
-There's only one startup script, rcbrc.
+                                            set hello "world"
+                                        
+                                        `
+                                    Then you can print variables or run them.
 
-you can add a bunch of things inside of it to run on startup.
+                                    $ hello
+                                    no such command: world
+                                    $ printf `$hello`
+                                    world $
 
-H. Leave
-
-There's a farewell message when you load RC for the first time.
-
-It reads:
-
-Welcome to RCBash!
-To get started, you can use bash instead of the default terminal by
-typing 'bash' if you have bash installed.
-
-The next step is to Learn Your OS.
-
-This uses all of your tools on your OS and doesn't contain any custom utilities.
-
-It's just a BASH for simplistic users.
-
-You can choose different default shells and more in the .rcbrc file. RCBash Is yours!
-
-it basically tells you how to set a default shell and tells you how to use bash.
-
-If the default shell isn't enough (like you need expressions, comparisons, files, etc ...) you can
-use the bash or zshell.
-
-H. If statement
+                                    you can also print secure warnings using "printf `$secure_warnings \n`"

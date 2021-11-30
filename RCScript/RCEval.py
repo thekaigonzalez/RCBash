@@ -15,7 +15,26 @@
 
 import RCScript.RCLexer as lexer
 import subprocess
+import platform
 import os
+
+def xxd(arg):
+    b = ' '.join(format(ord(x), 'b') for x in ' '.join(arg[1]))
+    print(b)
+def cat(args):
+     if args[1] == "--file":
+        if args[2] == "--read":
+
+            name = args[3]
+            ufile = open(name, 'r+')
+            a= ufile.readlines()
+            for line in a:
+                print(line)
+builta = {
+    'xxd': xxd,
+    'cat': cat,
+    "rd": lambda x: print("System Specs:\n " + platform.uname().system + ", {}, {}".format(platform.uname().processor, platform.uname().machine, platform.uname().version) )
+}
 
 uservars = lexer.uservars
 
@@ -33,36 +52,50 @@ def eval_rc(code):
 
             built = False
             arg = ast[item]['args']
-        
-            if (arg[0] == 'exit'):
-                quit(-1)
-                built = True
-            elif (arg[0] == 'echo'):
-                if (len(arg) > 1):
-                    print(str(arg[1]))
-                built = True
-            elif arg[0] == 'set':
-                if (len(arg) > 2):
-                    uservars[arg[1]] = arg[2]
-                built = True
-            elif arg[0] == 'cd':
-                if (len(arg) > 1):
-                    os.chdir(arg[1])
-            elif arg[0] == 'cmpare':
-                if (len(arg) >= 4):
-                    print("good " + arg[1])
-                    if uservars.get(arg[1]) != None:
-                        print("good")
-                        if uservars[arg[1]] == arg[2]:
-                            # print("done")
-                            eval_rc(arg[3])
-            elif arg[0] == 'pwd':
-                
-                built = True
+            try:
+                if (arg[0] == 'exit'):
+                    quit(-1)
+                    built = True
+                elif (arg[0] == 'echo'):
+                    if (len(arg) > 1):
+                        print(str(arg[1]))
+                    built = True
+                elif arg[0] == 'set':
+                    if (len(arg) > 2):
+                        uservars[arg[1]] = arg[2]
+                    built = True
+                elif arg[0] == 'cd':
+                    
+                    if (len(arg) > 1):
+                        if arg[1].find("usr") != -1 or arg[1].find("system") != -1:
+                            if uservars.get("secure_warnings") == 'yes' and uservars.get("secure_warnings") != None:
+                                print("WARNING: We recommend you back down!\nWe seen that this command: `" + code + "` could\nPOTENTIALLY be running malicious actions.\nYou can turn this warning off using the 'set secure_warnings no` command.\n(secure_warnings)")
+                                break
+                        os.chdir(arg[1])
+                    built = True
+                elif arg[0] == 'cmpare':
+                    if (len(arg) >= 4):
+                        print("good " + arg[1])
+                        if uservars.get(arg[1]) != None:
+                            print("good")
+                            if uservars[arg[1]] == arg[2]:
+                                # print("done")
+                                eval_rc(arg[3])
+                elif arg[0] == 'pwd':
+                    
+                    built = True
 
-                return os.getcwd()
+                    return os.getcwd()
+            except Exception:
+                print("build-core: exception")
             if uservars.get(arg[0].strip()) != None:
                 eval_rc(uservars[arg[0]])
+                break;
+            if builta.get(arg[0].strip()) != None:
+                try:
+                    builta[arg[0]](arg)
+                except:
+                    print("builtin-core: error")
                 break;
             if not built:
                 try:
