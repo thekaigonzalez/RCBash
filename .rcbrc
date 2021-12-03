@@ -6,6 +6,12 @@ set nf `bash -c "neofetch"`
 # the prompt
 set ps1 "[ rcsh ] $ "
 
+# Python aliases
+set py "python"
+set py3 "python3"
+set c-compiler "gcc"
+set clang-c "clang"
+
 # Agent (REQUIRED)
 set agent "User"
 
