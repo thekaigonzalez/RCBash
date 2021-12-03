@@ -27,6 +27,19 @@ def bmain():
             m = f.readlines()
             for i in m:
                 evaluate.eval_rc(i.strip())
+    #localize: implement default rcbrc
+    if pathlib.Path(os.path.expanduser("~/.rcbrc")).exists():
+        with open(os.path.expanduser("~/.rcbrc")) as f:
+            m = f.readlines()
+            for i in m:
+                evaluate.eval_rc(i.strip())
+
+    if pathlib.Path("/etc/rcb.rc").exists():
+        with open("/etc/rcb.rc") as f:
+            m = f.readlines()
+            for i in m:
+                evaluate.eval_rc(i.strip())
+                
     if evaluate.uservars.get('default') != None:
         evaluate.subprocess.call(evaluate.uservars['default'])
     if not pathlib.Path("./.first_time_login").exists():

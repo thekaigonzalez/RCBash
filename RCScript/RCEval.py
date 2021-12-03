@@ -21,6 +21,9 @@ import os
 def xxd(arg):
     b = ' '.join(format(ord(x), 'b') for x in ' '.join(arg[1]))
     print(b)
+
+# def add_runtime_bind
+
 def cat(args):
      if args[1] == "--file":
         if args[2] == "--read":
