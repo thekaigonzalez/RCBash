@@ -94,7 +94,7 @@ def eval_rc(code):
             except Exception:
                 print("build-core: exception")
             if uservars.get(arg[0].strip()) != None:
-                eval_rc(uservars[arg[0]])
+                arg[0] = eval_rc(uservars[arg[0]])
                 break;
             if builta.get(arg[0].strip()) != None:
                 try:
