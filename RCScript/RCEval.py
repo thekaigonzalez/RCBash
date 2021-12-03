@@ -22,7 +22,6 @@ def xxd(arg):
     b = ' '.join(format(ord(x), 'b') for x in ' '.join(arg[1]))
     print(b)
 
-# def add_runtime_bind
 
 def cat(args):
      if args[1] == "--file":
@@ -38,6 +37,9 @@ builta = {
     'cat': cat,
     "rd": lambda x: print("System Specs:\n " + platform.uname().system + ", {}, {}".format(platform.uname().processor, platform.uname().machine, platform.uname().version) )
 }
+
+def add_runtime_bind(name, d):
+    builta[name] = d
 
 uservars = lexer.uservars
 
