@@ -20,6 +20,16 @@ import sys
 import time
 import datetime
 import pathlib
+import colorama
+
+def dyn_color(argv):
+    if len(argv) >= 1:
+        try:
+            print(eval("colorama.Fore." + argv[1]))
+        except Exception as e:
+            print("fcolor: issue with coloring fore " + e)
+
+evaluate.add_runtime_bind('fcolor', dyn_color)
 
 def bmain():
     if pathlib.Path("./.rcbrc").exists():
@@ -27,6 +37,19 @@ def bmain():
             m = f.readlines()
             for i in m:
                 evaluate.eval_rc(i.strip())
+    #localize: implement default rcbrc
+    if pathlib.Path(os.path.expanduser("~/.rcbrc")).exists():
+        with open(os.path.expanduser("~/.rcbrc")) as f:
+            m = f.readlines()
+            for i in m:
+                evaluate.eval_rc(i.strip())
+
+    if pathlib.Path("/etc/rcb.rc").exists():
+        with open("/etc/rcb.rc") as f:
+            m = f.readlines()
+            for i in m:
+                evaluate.eval_rc(i.strip())
+
     if evaluate.uservars.get('default') != None:
         evaluate.subprocess.call(evaluate.uservars['default'])
     if not pathlib.Path("./.first_time_login").exists():
