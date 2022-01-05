@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+
+import argparse
+import subprocess
+import pathlib
+
+mandoc = ""
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("MANUAL", help="The manual to load.")
+parser.add_argument("CHAPTER", help="The chapter to load from. Default 1.", default="1")
+
+parser.add_argument("-e", action="store_true", help="instead of printing to stdout, handle with /bin/editor.")
+parser.add_argument("-f", action="store_true", help="Print a document title string. Format (MANUAL, chapter CHAPTER)")
+parser.add_argument("-local", action="store_true", help="Use local Manual directory, instead of the global /etc directory.")
+parser.add_argument("-fl", action="store_true", help="Tell manual you want a custom directory.")
+parser.add_argument("-cl", help="Change the local directory name. IT IS A PREFIXED NAME, SO THE PATH MUST END WITH '/'")
+args = parser.parse_args()
+
+mandoc = "/etc/rcbash/Manual/"
+
+if (args.fl == True): mandoc = args.cl
+
+if (args.f == True):
+    print("({}, chapter {})".format(args.MANUAL, args.CHAPTER))
+
+if (args.local == True):
+    mandoc = "Manual/"
+
+if (args.e == True):
+    if pathlib.Path("/usr/bin/editor").exists():
+        if (pathlib.Path(mandoc + "chapter{}/{}.txt".format(args.CHAPTER, args.MANUAL)).exists()):
+            subprocess.call(['/usr/bin/editor', mandoc + "chapter{}/{}.txt".format(args.CHAPTER, args.MANUAL)])
+else:
+    t = open(mandoc + "chapter{}/{}.txt".format(args.CHAPTER, args.MANUAL))
+    s = t.read()
+
+    print(s)

@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+
+import colorama
+import os
+import shutil
+import pathlib
+
+if pathlib.Path("Manual/").exists():
+    print(colorama.Style.BRIGHT + colorama.Fore.BLUE + "Copying local Manual to directories..." + colorama.Style.RESET_ALL +  colorama.Fore.RESET)
+    shutil.copytree("Manual/", "/etc/rcbash/Manual")
+    print("Copied Directories.")
