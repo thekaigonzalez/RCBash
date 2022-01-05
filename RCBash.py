@@ -13,16 +13,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import List
 import RCScript.RCEval as evaluate
 import readline
 import os
+import subprocess
 import sys
 import time
 import datetime
 import pathlib
 import colorama
 
-def dyn_color(argv):
+def dyn_color(argv: List[str]):
     if len(argv) >= 1:
         try:
             print(eval("colorama.Fore." + argv[1]))
@@ -53,25 +55,16 @@ def bmain():
     if evaluate.uservars.get('default') != None:
         evaluate.subprocess.call(evaluate.uservars['default'])
     if not pathlib.Path("./.first_time_login").exists():
-        animation = ['/', '-', '\\']
-
-        for i in range(10):
-            
-            time.sleep(0.1)
-            sys.stdout.write("loading .... ")
-            sys.stdout.flush()
-            sys.stdout.write(animation[i % len(animation)] + "\r")
-            sys.stdout.flush()
-        print("Welcome to RCBash!\nTo get started, you can use bash instead of the default terminal by\ntyping 'bash' if you have bash installed.")
-        print("""
-The next step is to Learn Your OS.
-
-This uses all of your tools on your OS and doesn't contain any custom utilities.
-
-It's just a BASH for simplistic users.
-
-You can choose different default shells and more in the .rcbrc file. RCBash Is yours!
-""")
+        
+        if (evaluate.uservars.get("show-editor-message") != None):
+            if pathlib.Path("/usr/bin/editor").exists():
+                if pathlib.Path("Extras/RCBash-Message.txt").exists():
+                    subprocess.call(['/usr/bin/editor' , 'Extras/RCBash-Message.txt'])
+            else:
+                if pathlib.Path("Extras/RCBash-Message.txt").exists():
+                    j = open("Extras/RCBash-Message.txt")
+                    print("\n".join(j.readlines()))
+                    j.close()
         open("./.first_time_login", "w").close()
     while True:
         try:

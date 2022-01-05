@@ -9,8 +9,12 @@ set ps1 "[ rcsh ] $ "
 # Python aliases
 set py "python"
 set py3 "python3"
+
+# c compilers
 set c-compiler "gcc"
 set clang-c "clang"
+
+set fc "fcolor"
 
 # Agent (REQUIRED)
 set agent "User"
@@ -18,6 +22,18 @@ set agent "User"
 # help command
 set help `printf "there are not any help commands.\nYou can learn about the RCSH in the README.\nWe've set the default PS1 to [ rcsh ] #"`
 
+# aliases
+set l "ls -l"
+set ll "ls -l"
+set la "ls -a"
+set lla "ls -la"
+
+# typos
+set cd.. "cd .."
+
+# minifiers
+set upgrade "sudo pacman -Sy"
+set upgade "sudo pacman -Sy"
 # default shell (set)
 set shell /bin/bash
 
@@ -26,8 +42,8 @@ set secure_warnings no
 # z shell
 set zshell /bin/zsh
 
-# uncomment to enable warnings (if someone's trying to cd into /usr, anything with /system, etc ...) (RECOMMENDED)
-#set secure_warnings "yes"
+# comment to disable warnings (if someone's trying to cd into /usr, anything with /system, etc ...) (RECOMMENDED)
+set secure_warnings "yes"
 
 # printf "hello\n"
 
@@ -36,3 +52,7 @@ set zshell /bin/zsh
 
 # UNCOMMENT TO SET ZSH AS DEFAULT SHELL!!!
 # set default /bin/zsh
+
+# This tries to use /usr/bin/editor to view a file, if you don't have this checked, the first time login message won't be
+# shown ever.
+set show-editor-message "yes"

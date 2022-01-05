@@ -59,6 +59,7 @@ def dictionary_ofrc(stri):
             args.append(buffer)
             buffer = ""
         elif char == "#" and state == 0: return "comment"
+        
         elif char == '&' and state == 10:
             if (stri[i+1] == '&'):
                 return print("error: lexer: 'bash-like features' are not supported (key '&&')")
@@ -85,7 +86,7 @@ def dictionary_ofrc(stri):
         # print(": " + buffer)
         # print(get)
         # print(buffer)
-        get = str(eval(get))
+        get = str(uservars.get(get))
         # print(get)
         buffer += str(get)
 

@@ -1,0 +1,7 @@
+Hello, welcome to RCBash!
+
+This is the Terminal manager for the people who like my software, this is licensed under MIT and 
+this is a readme file found in the Extras folder.
+
+If you're not seeing this, that means there's no extras folder.
+
