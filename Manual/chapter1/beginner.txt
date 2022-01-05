@@ -1,0 +1,14 @@
+A Beginners guide to RCBash
+
+1. Learn Your OS.
+    You can use your OS's tools (BUT NOT ALIASES OR FUNCTIONS FROM BASHES) to create
+    a nice experience.
+
+2. Review the tools source code.
+    You can review source code for the tools because all tools are open source.
+    There are local tools and root tools. You can view sources by editing files in Software/
+
+
+
+
+You can choose different default shells and more in the .rcbrc file. RCBash Is yours!
