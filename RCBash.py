@@ -15,7 +15,8 @@
 
 from typing import List
 import RCScript.RCEval as evaluate
-import readline
+from pyreadline import Readline
+readline = Readline()
 import os
 import subprocess
 import sys
