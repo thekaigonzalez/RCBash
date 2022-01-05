@@ -13,6 +13,7 @@ set py3 "python3"
 # c compilers
 set c-compiler "gcc"
 set clang-c "clang"
+set CC "gcc"
 
 set fc "fcolor"
 
@@ -56,3 +57,7 @@ set secure_warnings "yes"
 # This tries to use /usr/bin/editor to view a file, if you don't have this checked, the first time login message won't be
 # shown ever.
 set show-editor-message "yes"
+
+# Version of RCBash (Mutable) (Recommended not to mess with this !!!)
+set rcb-version "1.1.0"
+set rcb-branched "software-master"

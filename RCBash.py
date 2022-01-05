@@ -31,6 +31,7 @@ def dyn_color(argv: List[str]):
         except Exception as e:
             print("fcolor: issue with coloring fore " + e)
 
+
 evaluate.add_runtime_bind('fcolor', dyn_color)
 
 def bmain():

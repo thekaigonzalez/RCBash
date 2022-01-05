@@ -1,0 +1,17 @@
+Here's how to install shell-specific softwares into rcbash
+
+1. Changing Shell
+
+You can download or use specific shell aliases from (bash, sh, etc ...) by using it's command.
+
+It's highlighted in the .rcbrc local file.
+
+:
+# UNCOMMENT TO SET BASH AS DEFAULT SHELL!!!
+# set default /bin/bash
+
+# UNCOMMENT TO SET ZSH AS DEFAULT SHELL!!!
+# set default /bin/zsh
+:
+
+The 'default' variable is for loading another shell instead of the default command processor.
