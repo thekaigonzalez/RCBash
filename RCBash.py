@@ -13,14 +13,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from math import e
+import shutil
 from typing import List
 import RCScript.RCEval as evaluate
 import readline
 import os
+import importlib
 import subprocess
 import sys
 import time
 import datetime
+# 
 import pathlib
 import colorama
 
@@ -31,7 +35,10 @@ def dyn_color(argv: List[str]):
         except Exception as e:
             print("fcolor: issue with coloring fore " + e)
 
+def time(argv: List[str]):
+    print(str(datetime.datetime.now()))
 
+evaluate.add_runtime_bind("time", time)
 evaluate.add_runtime_bind('fcolor', dyn_color)
 
 def bmain():
@@ -67,9 +74,63 @@ def bmain():
                     print("\n".join(j.readlines()))
                     j.close()
         open("./.first_time_login", "w").close()
+    
+    if pathlib.Path("/etc/rcbash/Plugins").exists():
+        spp = evaluate.uservars.get("show-plugin-preload") 
+        cpl = evaluate.uservars.get("confirm-plugin-load")
+        b = True
+        isdb = evaluate.uservars.get("DEBUG") == "true"
+        if spp != None:
+            print("Plugins found! Viewing and loading.")
+
+        p = os.listdir("/etc/rcbash/Plugins/")
+
+        if spp != None:
+            print("Plugins to load: " + " ".join(p))
+        
+        if cpl != None:
+            print("Would you like to load the plugins now?")
+
+            yn = input("[y/N] > ").strip()
+
+            if yn == "y":
+                print("Ok! Running local extensions...")
+            else:
+                print("Ok! Not running extensions.")
+                b = False
+
+        if b == True:
+            if spp != None:
+                print("Reading extensions...")
+            for entry in p:
+                if pathlib.Path("/etc/rcbash/Plugins/" + entry + "/" + entry + ".py").exists():
+                    if spp != None:
+                        print("Loading plugin file {}".format(entry + ".py"))
+                    if pathlib.Path("cache").exists():
+                        if isdb:
+                            print("debug: FOUND CACHE DIR")
+                        shutil.copyfile("/etc/rcbash/Plugins/" + entry + "/" + entry + ".py", "cache/" + entry + ".py")
+                        mod = importlib.import_module("cache." + entry)
+                        # print(str(mod))
+                        if mod.VERSION != None:
+                            if spp != None:
+                                print("{}, version {}".format(entry, mod.VERSION))
+                        try:
+                            mod.pluginInit(evaluate.uservars)
+                            mod.exitPlugin()
+                        except Exception as e:
+                            print("Error while loading plugin: " + entry + "\nException: " + str(e))
+                    else:
+                        os.mkdir("cache")
+                        print("Error while loading plugins, couldn't find a cache. Reload RCBash and try again.")
+
     while True:
         try:
-            inp = input((evaluate.uservars['agent'] if evaluate.uservars['agent'] != None else "agent") + " at " + evaluate.uservars['ps1'] if evaluate.uservars['ps1'] != None else '[ bash ] $')
+            inp = ""
+            if evaluate.uservars.get("use-system-ps1") == "true":
+                inp = input("[ " + os.getcwd() + " ] $ ")
+            else:
+                inp = input((evaluate.uservars['agent'] if evaluate.uservars['agent'] != None else "agent") + " at " + evaluate.uservars['ps1'] if evaluate.uservars['ps1'] != None else '[ bash ] $')
 
             evaluate.eval_rc(inp)
         except EOFError:

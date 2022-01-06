@@ -60,4 +60,16 @@ set show-editor-message "yes"
 
 # Version of RCBash (Mutable) (Recommended not to mess with this !!!)
 set rcb-version "1.1.0"
-set rcb-branched "software-master"
+set rcb-branched "addon-patch-master"
+
+# This sends a message when there's plugins to load.
+# set show-plugin-preload "yes"
+
+# This is a confirmation message (Would you like to load plugins? [y/N]) (FOR SECURITY)
+# et confirm-plugin-load "yes"
+
+# This is DEBUG, sends system messages.
+set DEBUG "false"
+
+# Use system PS1 uses a custom prompt which uses specific features from Python.
+set use-system-ps1 "true"
