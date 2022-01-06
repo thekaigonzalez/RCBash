@@ -15,6 +15,6 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-# RCBash
-
+# RCBash Windows
+RCBASH WINDOWS IS OUTDATED. IF YOU WANT TO USE RCBASH ON WINDOWS, PLEASE CONSIDER GOING TO THE RCBASHFORWINDOWS PROJECT
 RCBash is a cross platform command processor.
