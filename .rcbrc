@@ -35,6 +35,7 @@ set cd.. "cd .."
 # minifiers
 set upgrade "sudo pacman -Sy"
 set upgade "sudo pacman -Sy"
+set plinst "sudo PluginManage -install"
 # default shell (set)
 set shell /bin/bash
 

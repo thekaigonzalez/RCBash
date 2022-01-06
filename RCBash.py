@@ -112,14 +112,18 @@ def bmain():
                         shutil.copyfile("/etc/rcbash/Plugins/" + entry + "/" + entry + ".py", "cache/" + entry + ".py")
                         mod = importlib.import_module("cache." + entry)
                         # print(str(mod))
-                        if mod.VERSION != None:
-                            if spp != None:
-                                print("{}, version {}".format(entry, mod.VERSION))
                         try:
-                            mod.pluginInit(evaluate.uservars)
-                            mod.exitPlugin()
+                            if mod.VERSION != None:
+                                if spp != None:
+                                    print("{}, version {}".format(entry, mod.VERSION))
+                            try:
+                                mod.pluginInit(evaluate.uservars)
+                                mod.exitPlugin()
+                            except Exception as e:
+                                print("Error while loading plugin: " + entry + "\nException: " + str(e))
                         except Exception as e:
-                            print("Error while loading plugin: " + entry + "\nException: " + str(e))
+                            print("Make sure you have a VERSION variable!")
+                            continue
                     else:
                         os.mkdir("cache")
                         print("Error while loading plugins, couldn't find a cache. Reload RCBash and try again.")

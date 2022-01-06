@@ -1,0 +1,29 @@
+Addon Creation
+
+This episode we'll create an addon called "initialfetch" which will send system specs
+
+like the RD Command.
+
+Initialfetch will call neofetch, similar to how it would be done in the RC file.
+
+Example:
+
+import subprocess
+
+VERSION='0.0.1'
+
+def pluginInit(env):
+    subprocess.run(['neofetch'])
+    
+
+def exitPlugin():
+    pass
+
+This is equivalent to adding
+
+'neofetch'
+
+to your RC File.
+
+This was mainly to show how easy it is in python VS RC. And the flexibility Python gives you.
+

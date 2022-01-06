@@ -36,5 +36,6 @@ def pluginInit(env):
         else:
             print("chroot-plugin: there's no chroot directory to change?")
         
+# called when the plugin exits. Required.
 def exitPlugin():
     pass
