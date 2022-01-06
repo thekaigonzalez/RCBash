@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+
+# Official PluginManage Software
+
+import argparse
+import pathlib
+import shutil
+
+parser = argparse.ArgumentParser("PluginManage", description="""
+PluginManage is a part of the RCbash utility channel.
+It's here for referencing and building plugins.
+
+Plugins are local files which are preloaded by RCBash at runtime.
+
+Plugins are saved in /etc/rcbash/Plugins/
+""")
+
+parser.add_argument("-install", action="store_true", help="Should it install one?")
+
+args = parser.parse_args()
+
+if (args.install == True):
+    print("Installing plugins...")
+    if pathlib.Path("plugins").exists():
+        print("Found local plugins directory! installing to /etc/rcbash/Plugins")
+        shutil.rmtree('/etc/rcbash/Plugins')
+        shutil.copytree("plugins/", "/etc/rcbash/Plugins")
+        print("Finished copying directory.")
+    else:
+        print("PluginManage-Install requires a 'plugins` directory to be in the current directory.")
