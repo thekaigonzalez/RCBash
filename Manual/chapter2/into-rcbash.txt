@@ -14,3 +14,4 @@ Plugin software
 Manuals Software
 and Manual setup software.
 
+These softwares are essential for managing RCBash features.

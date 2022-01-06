@@ -8,3 +8,5 @@ Plugins VS the RCBRC are different, as the RCBRC supports only RCBScript code, a
 ONLY INSTALL PYTHON EXTENSIONS FROM TRUSTED SITES & PEOPLE!
 
 Python code could be anything. Please be careful!
+
+Plugins are usually local, but you can install extra plugins soon with the PluginDownload tool.
