@@ -1,0 +1,16 @@
+Into RCBash
+
+Using these commands will help you to become more productive in RCBash.
+
+If you open RCBash and type, 
+
+sudo bash download.sh
+
+after installing RCBash, you will get the newest set of software written by the RCBash developer.
+
+Contains 
+
+Plugin software
+Manuals Software
+and Manual setup software.
+

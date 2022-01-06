@@ -1,0 +1,10 @@
+Plugins 
+
+The PluginManage tool is a simple utility for installing Plugins into RCBash, you're basically
+creating a preload function, which not many other bashes have. Except for RCs.
+
+Plugins VS the RCBRC are different, as the RCBRC supports only RCBScript code, and Plugins allow Python code.
+
+ONLY INSTALL PYTHON EXTENSIONS FROM TRUSTED SITES & PEOPLE!
+
+Python code could be anything. Please be careful!
