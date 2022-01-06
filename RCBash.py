@@ -119,6 +119,7 @@ def bmain():
                             try:
                                 mod.pluginInit(evaluate.uservars)
                                 mod.exitPlugin()
+                                os.remove("cache/" + entry + ".py")
                             except Exception as e:
                                 print("Error while loading plugin: " + entry + "\nException: " + str(e))
                         except Exception as e:
