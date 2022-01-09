@@ -102,6 +102,7 @@ def eval_rc(code):
                 except:
                     print("builtin-core: error")
                 break;
+            # print(arg)
             if not built:
                 try:
                     return subprocess.call(arg)

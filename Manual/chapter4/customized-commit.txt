@@ -1,0 +1,20 @@
+Customized Plugin Commit
+
+In your PluginManage, there's a feature that new-plugins branch adds called the "Advanced Commit" feature.
+Essentially it allows you to single install addons.
+
+Example: say you wanted to install a custom addon from another user. You'd download the repository and CD into it.
+
+After, you'd use PluginManage from the local plugin directory.
+
+[ /home/kaigonzalez/RCBash/TestPlug ] $ sudo PluginManage commit -d -s myplugin -l 
+
+Using advanced commit
+installing from directory plugins/
+Checking for directory plugins and loading plugin myplugin.
+Found plugins, single-load myplugin
+Found myplugin, adding to Plugins!
+
+This would then load the plugin.
+
+You can see the test Plugin at /TestPlug in GitHub.
