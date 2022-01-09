@@ -5,10 +5,21 @@ Essentially it allows you to single install addons.
 
 Example: say you wanted to install a custom addon from another user. You'd download the repository and CD into it.
 
-After, you'd use PluginManage from the local plugin directory.
+After, you'd use PluginManage from the local plugin directory using "sudo PluginManage commit -d -s myplugin -l"
+
+sudo: Superuser do
+PluginManage: The pluginmanage Software.
+commit -d: Commit an advanced operation. '-d' checks and confirms it's what you want to do.
+-s myplugin: -s selects a plugin.
+-l: use a local directory.
+
+English:
+    Run PluginManage as superuser and commit an advanced operation selecting 
+    and installing "myplugin" using the local install directory.
+
 
 [ /home/kaigonzalez/RCBash/TestPlug ] $ sudo PluginManage commit -d -s myplugin -l 
-
+                                                              
 Using advanced commit
 installing from directory plugins/
 Checking for directory plugins and loading plugin myplugin.
@@ -18,3 +29,4 @@ Found myplugin, adding to Plugins!
 This would then load the plugin.
 
 You can see the test Plugin at /TestPlug in GitHub.
+
