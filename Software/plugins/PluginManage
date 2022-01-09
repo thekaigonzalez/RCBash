@@ -3,6 +3,7 @@
 # Official PluginManage Software
 
 import argparse
+import os
 import pathlib
 import shutil
 
@@ -16,8 +17,41 @@ Plugins are saved in /etc/rcbash/Plugins/
 """)
 
 parser.add_argument("-install", action="store_true", help="Should it install one?")
+parser.add_argument("-remove", action="store_true", help="Or should it remove all addons?")
+
+subparser_setup = parser.add_subparsers(help="Commands to install advanced plugins. Or commit operations.")
+
+commit = subparser_setup.add_parser("commit", help="Commit a Command")
+
+commit.add_argument("-d", action="store_true", help="Use advanced commit")
+commit.add_argument("-s", help="select a command to install. Make sure to check -d!")
+commit.add_argument("-l", help="Use a local directory?", action="store_true")
+commit.add_argument("-dc", help="Don't use system directory. Use the custom directory. If set.", action="store_true")
+commit.add_argument("-ld", help="custom directory. This is set after arguments are collected.")
 
 args = parser.parse_args()
+dir = "plugins"
+if (args.dc):
+    dir = args.ld
+
+
+
+if (args.d):
+    print("Using advanced commit")
+    print("installing from directory {}/".format(str(dir)))
+    print("Checking for directory {} and loading plugin {}.".format(dir, args.s))
+
+    if pathlib.Path(dir).exists():
+        print("Found {}, single-load {}".format(dir, args.s))
+
+        p = os.listdir(dir)
+
+        if args.s in p:
+            print("Found {}, adding to Plugins!".format(args.s))
+            shutil.copytree("{}/{}".format(dir, args.s), "/etc/rcbash/Plugins/{}".format(args.s))
+            print("added {} to plugins. Commit finished.".format(args.s))
+
+
 
 if (args.install == True):
     print("Installing plugins...")
@@ -28,3 +62,8 @@ if (args.install == True):
         print("Finished copying directory.")
     else:
         print("PluginManage-Install requires a 'plugins` directory to be in the current directory.")
+
+if args.remove == True:
+    print("removing plugins...")
+    shutil.rmtree("/etc/rcbash/Plugins")
+    print("removed!")

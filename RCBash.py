@@ -38,7 +38,13 @@ def dyn_color(argv: List[str]):
 def time(argv: List[str]):
     print(str(datetime.datetime.now()))
 
+def clean(argv: List[str]):
+    print("WARNING: Cleaning the cache may lead to certain issues out of my control. Use wisely!")
+    shutil.rmtree("cache")
+    os.mkdir("cache")
+
 evaluate.add_runtime_bind("time", time)
+evaluate.add_runtime_bind("clean", clean)
 evaluate.add_runtime_bind('fcolor', dyn_color)
 
 def bmain():
@@ -109,8 +115,12 @@ def bmain():
                     if pathlib.Path("cache").exists():
                         if isdb:
                             print("debug: FOUND CACHE DIR")
+                        
                         shutil.copyfile("/etc/rcbash/Plugins/" + entry + "/" + entry + ".py", "cache/" + entry + ".py")
-                        mod = importlib.import_module("cache." + entry)
+                        try:
+                            mod = importlib.import_module("cache." + entry)
+                        except Exception as e:
+                            print("Error occurred.")
                         # print(str(mod))
                         try:
                             if mod.VERSION != None:
@@ -119,7 +129,7 @@ def bmain():
                             try:
                                 mod.pluginInit(evaluate.uservars)
                                 mod.exitPlugin()
-                                os.remove("cache/" + entry + ".py")
+                                
                             except Exception as e:
                                 print("Error while loading plugin: " + entry + "\nException: " + str(e))
                         except Exception as e:
@@ -128,6 +138,8 @@ def bmain():
                     else:
                         os.mkdir("cache")
                         print("Error while loading plugins, couldn't find a cache. Reload RCBash and try again.")
+        
+        
 
     while True:
         try:
@@ -140,9 +152,9 @@ def bmain():
             evaluate.eval_rc(inp)
         except EOFError:
             print("logout")
-            quit(-1)
+            quit(-1) 
         except KeyboardInterrupt:
-            print("exit")
-            quit(-1)
+            print()
+            continue
 
 bmain()

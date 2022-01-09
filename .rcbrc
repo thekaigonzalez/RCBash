@@ -1,5 +1,11 @@
 # this is the file containing basic types
 
+fcolor RED
+
+echo "Welcome to RCBash!"
+
+fcolor RESET
+
 # alias to neofetch
 set nf `bash -c "neofetch"`
 
@@ -36,6 +42,7 @@ set cd.. "cd .."
 set upgrade "sudo pacman -Sy"
 set upgade "sudo pacman -Sy"
 set plinst "sudo PluginManage -install"
+set plrm "sudo PluginManage -remove"
 # default shell (set)
 set shell /bin/bash
 
@@ -60,8 +67,8 @@ set secure_warnings "yes"
 set show-editor-message "yes"
 
 # Version of RCBash (Mutable) (Recommended not to mess with this !!!)
-set rcb-version "1.1.0"
-set rcb-branched "addon-patch-master"
+set rcb-version "1.3.2"
+set rcb-branched "plugins-patch-master"
 
 # This sends a message when there's plugins to load.
 # set show-plugin-preload "yes"
@@ -74,3 +81,6 @@ set DEBUG "false"
 
 # Use system PS1 uses a custom prompt which uses specific features from Python.
 set use-system-ps1 "true"
+
+# Modular Plugins Download System check
+set modulos-enabled "true"
