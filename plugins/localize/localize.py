@@ -28,7 +28,7 @@ VERSION='0.0.1'
 # Contributions safely.
 # The 'env' variable is for the user environment. You can check certain settings.
 def pluginInit(env):
-    print("localize-chroot: version {}".format(VERSION))
+    # print("localize-chroot: version {}".format(VERSION))
     dir = env.get("chroot-dir")
     if (env.get("use-chroot") != None):
         if dir != None:
