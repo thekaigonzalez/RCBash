@@ -1,0 +1,20 @@
+#!/usr/bin/python3
+
+import argparse
+import pathlib
+
+parser = argparse.ArgumentParser("SwitchMainRepository", description="""
+SMR switches the main repository and removes the comments from your repository file.
+
+You need to run this with root!
+""")
+
+parser.add_argument("to", help="To what?")
+
+args = parser.parse_args()
+
+if pathlib.Path("/etc/rcbash/plugins.txt").exists():
+    print("Changing main repository...")
+    f = open("/etc/rcbash/plugins.txt", 'w')
+    f.write(args.to)
+    f.close()

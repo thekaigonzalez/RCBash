@@ -1,0 +1,10 @@
+
+// This is the plugins.txt file. You can write comments
+// using the '//' operator.
+// Blank lines are a bad practice and undefined behaviour. 
+// These are trusted sources (from the official RCBash developer.)
+// This is the first and only should be URL.
+
+// You can't use any more URLs, you can only change it to install new ones and change it back.
+https://raw.githubusercontent.com/thekaigonzalez/RCBash/master/local-repo/
+    
