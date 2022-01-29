@@ -84,3 +84,6 @@ set use-system-ps1 "true"
 
 # Modular Plugins Download System check
 set modulos-enabled "true"
+
+# Use German Efficiency
+set g_efficiency "true"

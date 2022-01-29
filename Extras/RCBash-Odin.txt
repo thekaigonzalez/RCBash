@@ -1,0 +1,5 @@
+Odin: Localization
+
+RCBash ist ein Terminal-Anwendung welche gibt tüchtigkeit bei die Terminal.
+
+Wenn Sie nicht sehen können dies, nein Extras-Folder ist gegenwart.
