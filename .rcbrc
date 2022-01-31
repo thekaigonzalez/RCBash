@@ -87,3 +87,5 @@ set modulos-enabled "true"
 
 # Use German Efficiency
 set g_efficiency "true"
+
+set crls "RX132"
