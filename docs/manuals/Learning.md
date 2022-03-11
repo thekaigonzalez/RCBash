@@ -14,15 +14,17 @@
  limitations under the License.
 -->
 
-<html>
-    <meta>
-        <link href="rcbash.css" rel="stylesheet">
-    </meta>
+# A Beginners guide to RCBash
 
-    <div id="welcome">
-        <h1> Welcome to RCBash! </h1>
-        <p>This is the officially written page for the <a href="https://github.com/thekaigonzalez/RCBash">RCBash Project</a></p>
-        <br>
-        <p>You can find written documentation, online manuals, versions, and more.</p>
-    </div>
-</html>
+1. Learn Your OS.
+    You can use your OS's tools (BUT NOT ALIASES OR FUNCTIONS FROM BASHES) to create
+    a nice experience.
+
+2. Review the tools source code.
+    You can review source code for the tools because all tools are open source.
+    There are local tools and root tools. You can view sources by editing files in Software/
+
+
+
+
+You can choose different default shells and more in the .rcbrc file. RCBash Is yours!

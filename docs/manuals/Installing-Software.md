@@ -14,15 +14,20 @@
  limitations under the License.
 -->
 
-<html>
-    <meta>
-        <link href="rcbash.css" rel="stylesheet">
-    </meta>
+# Here's how to install shell-specific softwares into rcbash
 
-    <div id="welcome">
-        <h1> Welcome to RCBash! </h1>
-        <p>This is the officially written page for the <a href="https://github.com/thekaigonzalez/RCBash">RCBash Project</a></p>
-        <br>
-        <p>You can find written documentation, online manuals, versions, and more.</p>
-    </div>
-</html>
+1. Changing Shell
+
+You can download or use specific shell aliases from (bash, sh, etc ...) by using it's command.
+
+It's highlighted in the .rcbrc local file.
+
+```bash
+# UNCOMMENT TO SET BASH AS DEFAULT SHELL!!!
+# set default /bin/bash
+
+# UNCOMMENT TO SET ZSH AS DEFAULT SHELL!!!
+# set default /bin/zsh
+```
+
+The 'default' variable is for loading another shell instead of the default command processor.

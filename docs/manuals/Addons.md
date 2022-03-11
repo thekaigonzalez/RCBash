@@ -14,15 +14,32 @@
  limitations under the License.
 -->
 
-<html>
-    <meta>
-        <link href="rcbash.css" rel="stylesheet">
-    </meta>
+# Addon Creation
 
-    <div id="welcome">
-        <h1> Welcome to RCBash! </h1>
-        <p>This is the officially written page for the <a href="https://github.com/thekaigonzalez/RCBash">RCBash Project</a></p>
-        <br>
-        <p>You can find written documentation, online manuals, versions, and more.</p>
-    </div>
-</html>
+This episode we'll create an addon called "initialfetch" which will send system specs
+
+like the RD Command.
+
+Initialfetch will call neofetch, similar to how it would be done in the RC file.
+
+Example:
+
+import subprocess
+
+VERSION='0.0.1'
+
+def pluginInit(env):
+    subprocess.run(['neofetch'])
+    
+
+def exitPlugin():
+    pass
+
+This is equivalent to adding
+
+'neofetch'
+
+to your RC File.
+
+This was mainly to show how easy it is in python VS RC. And the flexibility Python gives you.
+

@@ -14,15 +14,20 @@
  limitations under the License.
 -->
 
-<html>
-    <meta>
-        <link href="rcbash.css" rel="stylesheet">
-    </meta>
+# Into RCBash
 
-    <div id="welcome">
-        <h1> Welcome to RCBash! </h1>
-        <p>This is the officially written page for the <a href="https://github.com/thekaigonzalez/RCBash">RCBash Project</a></p>
-        <br>
-        <p>You can find written documentation, online manuals, versions, and more.</p>
-    </div>
-</html>
+Using these commands will help you to become more productive in RCBash.
+
+If you open RCBash and type, 
+
+sudo bash download.sh
+
+after installing RCBash, you will get the newest set of software written by the RCBash developer.
+
+Contains 
+
+Plugin software
+Manuals Software
+and Manual setup software.
+
+These softwares are essential for managing RCBash features.

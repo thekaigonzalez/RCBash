@@ -14,15 +14,15 @@
  limitations under the License.
 -->
 
-<html>
-    <meta>
-        <link href="rcbash.css" rel="stylesheet">
-    </meta>
+# Plugins 
 
-    <div id="welcome">
-        <h1> Welcome to RCBash! </h1>
-        <p>This is the officially written page for the <a href="https://github.com/thekaigonzalez/RCBash">RCBash Project</a></p>
-        <br>
-        <p>You can find written documentation, online manuals, versions, and more.</p>
-    </div>
-</html>
+The PluginManage tool is a simple utility for installing Plugins into RCBash, you're basically
+creating a preload function, which not many other bashes have. Except for RCs.
+
+Plugins VS the RCBRC are different, as the RCBRC supports only RCBScript code, and Plugins allow Python code.
+
+ONLY INSTALL PYTHON EXTENSIONS FROM TRUSTED SITES & PEOPLE!
+
+Python code could be anything. Please be careful!
+
+Plugins are usually local, but you can install extra plugins soon with the PluginDownload tool.
