@@ -32,10 +32,16 @@ def cat(args):
             a= ufile.readlines()
             for line in a:
                 print(line)
+
+def rand(args):
+    for i in range(1, len(args)):
+        eval_rc(args[i])
+
 builta = {
     'xxd': xxd,
     'cat': cat,
-    "rd": lambda x: print("System Specs:\n " + platform.uname().system + ", {}, {}".format(platform.uname().processor, platform.uname().machine, platform.uname().version) )
+    "rd": lambda x: print("System Specs:\n " + platform.uname().system + ", {}, {}".format(platform.uname().processor, platform.uname().machine, platform.uname().version) ),
+    "mlti": rand
 }
 
 def add_runtime_bind(name, d):
@@ -99,8 +105,9 @@ def eval_rc(code):
             if builta.get(arg[0].strip()) != None:
                 try:
                     builta[arg[0]](arg)
-                except:
+                except Exception as e:
                     print("builtin-core: error")
+                    #print(str(e))
                 break;
             # print(arg)
             if not built:
