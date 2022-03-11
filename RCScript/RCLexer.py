@@ -12,8 +12,14 @@ def dictionary_ofrc(stri):
     buffer = ""
 
     i = 0
+
     get = ""
+
     stat_level = 0
+
+    # prevent issues with typing
+    if (type(stri) != str): return
+    
     for char in stri:
         
         if (char == '"' and state == 10 and stri[i-1] != '\\'):
