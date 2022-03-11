@@ -24,4 +24,4 @@ RCBash is a UNIX-based platform command processor.
 RCBash (RC Bash) (RC Bourne Again Shell) (Modular Bourne Again Shell)
 
 Modular Bourne Again SHell is a completely modular shell application with a system of manuals,
-software, and other. QBasic support coming soon.
+software, and other things.
