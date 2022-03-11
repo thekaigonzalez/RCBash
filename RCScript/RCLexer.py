@@ -3,7 +3,7 @@
 uservars = {}
 
 def dictionary_ofrc(stri):
-    state = 0
+    state = 10
 
     stat_dict = {}
 
@@ -21,7 +21,7 @@ def dictionary_ofrc(stri):
     if (type(stri) != str): return
     
     for char in stri:
-        
+        if (char == '#' and state == 10): break
         if (char == '"' and state == 10 and stri[i-1] != '\\'):
             state = 100
         elif char == '"' and state == 100 and stri[i-1] != '\\':
