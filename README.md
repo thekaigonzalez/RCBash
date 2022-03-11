@@ -17,7 +17,7 @@
 
 # RCBash
 
-RCBash is a cross platform command processor.
+RCBash is a UNIX-based platform command processor.
 
 ## Meaning
 
