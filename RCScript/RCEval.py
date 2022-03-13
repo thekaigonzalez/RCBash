@@ -51,9 +51,7 @@ uservars = lexer.uservars
 
 def eval_rc(code):
     ast = lexer.dictionary_ofrc(code)
-    # print(ast)
-
-
+    
     for item in ast:
         # print("iterate")
         if type(item) == str: break;
@@ -63,6 +61,9 @@ def eval_rc(code):
 
             built = False
             arg = ast[item]['args']
+            if arg[0].startswith("&"): # reference
+                if uservars.get(arg[0][1:]):
+                    arg[0] = uservars.get(arg[0][1:])
             try:
                 if (arg[0] == 'exit'):
                     quit(-1)
