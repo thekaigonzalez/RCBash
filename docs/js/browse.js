@@ -23,6 +23,7 @@ function executeIfFileExist(src, callback) {
 }
 function execute() {
     var text = document.getElementById("document").textContent
+    console.log(text)
     executeIfFileExist("https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md", function() {
         window.location = "https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md";  
     })

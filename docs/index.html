@@ -18,24 +18,7 @@
 
     <meta>
         <link href="rcbash.css" rel="stylesheet">
-        <script >
-
-function executeIfFileExist(src, callback) {
-    var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = function() {
-        if (this.readyState === this.DONE) {
-            callback()
-        }
-    }
-    xhr.open('HEAD', src)
-}
-function execute() {
-    var text = document.getElementById("document").textContent
-    executeIfFileExist("https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md", function() {
-        window.location = "https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md";  
-    })
-}
-        </script>
+        <script src="./js/browse.js"></script>
     </meta>
 
     <div id="welcome">
