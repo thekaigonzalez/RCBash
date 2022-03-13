@@ -26,3 +26,7 @@ h1 {
 p {
     font-family: Arial, Helvetica, ariel, sans-serif;
 }
+
+textarea {
+    font-family: 'Consolas', Courier, monospace;
+}
