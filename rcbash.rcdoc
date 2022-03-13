@@ -9,3 +9,12 @@ you may not use this file except in compliance with the License.-
 RCBash is a utility written for *NIX* systems, with somewhat NT support, *if you try hard enough.*
 
 You can use RCBash like your normal terminal, just be sure to link your *LIBS* to prevent errors.
+
+RCBash *(RC Bash) (RC Bourne Again Shell) (Modular Bourne Again Shell)*
+
+Modular Bourne Again SHell is a completely modular shell application with a system of manuals,
+software, and other things.
+
+## RCBash History
+
+Around 5 months ago the project began, because it was meant to be a recreation of famous terminal programming languages such as Bash, ZSH, etc.
