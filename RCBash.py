@@ -39,6 +39,14 @@ def dyn_color(argv: List[str]):
         except Exception as e:
             print("fcolor: issue with coloring fore " + e)
 
+def dyn_style(argv: List[str]):
+    if len(argv) >= 1:
+        try:
+            print(eval("colorama.Style." + argv[1]))
+        except Exception as e:
+            print("fcolor: issue with coloring fore " + e)
+
+
 def time(argv: List[str]):
     print(str(datetime.datetime.now()))
 
@@ -50,6 +58,7 @@ def clean(argv: List[str]):
 evaluate.add_runtime_bind("time", time)
 evaluate.add_runtime_bind("clean", clean)
 evaluate.add_runtime_bind('fcolor', dyn_color)
+evaluate.add_runtime_bind('style', dyn_style)
 
 evaluate.uservars['HOME'] = HM
 
@@ -191,10 +200,17 @@ par = argparse.ArgumentParser("rcbash")
 
 par.add_argument("-doc", default="NONNEEE")
 par.add_argument('-style', default="None")
-
+par.add_argument("--FILE", default=None, required=False)
 args = par.parse_args()
-
-if args.doc != "NONNEEE":
+if (args.FILE != None):
+    print("File exec")
+    if pathlib.Path(args.FILE).exists():
+        with open(os.path.expanduser(args.FILE)) as f:
+            m = f.readlines()
+            for i in m:
+                evaluate.eval_rc(i.strip())
+    exit(0)
+elif args.doc != "NONNEEE":
 
     print("Building document")
     if pathlib.Path(args.doc).exists():
@@ -202,6 +218,7 @@ if args.doc != "NONNEEE":
             doc.compileRCDocFile(args.doc, args.style)
         else:
             doc.compileRCDocFile(args.doc)
+
 else:
     if __name__ == "__main__":
         Interpreter()
