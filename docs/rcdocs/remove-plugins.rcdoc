@@ -1,0 +1,17 @@
+- 
+
+GPL
+
+-
+
+# Removing All your plugins
+
+First setup: Remove the plugin files:
+
+*sudo CleanPlugins*
+
+Second: Clean the cache (stored copies of plugins)
+
+*clean*
+
+Third: Restart.

@@ -13,3 +13,4 @@
 # limitations under the License.
 
 python3 RCBash.py -doc docs/rcdocs/fixing-path.rcdoc -style ../rcbash.css
+python3 RCBash.py -doc docs/rcdocs/remove-plugins.rcdoc -style ../rcbash.css
