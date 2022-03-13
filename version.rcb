@@ -1,3 +1,17 @@
 # Print version 
 
+style BRIGHT
+fcolor GREEN
+
+rd
+
+fcolor RESET
+fcolor YELLOW
+
+printf "Branch version"
+
+# reset styles
+fcolor RESET
+style NORMAL
+
 printf "1.5.5-source"

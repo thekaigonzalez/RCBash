@@ -15,6 +15,7 @@
 
 import RCScript.RCLexer as lexer
 import subprocess
+import psutil
 import platform
 import os
 
@@ -40,7 +41,7 @@ def rand(args):
 builta = {
     'xxd': xxd,
     'cat': cat,
-    "rd": lambda x: print("System Specs:\n " + platform.uname().system + ", {}, {}".format(platform.uname().processor, platform.uname().machine, platform.uname().version) ),
+    "rd": lambda x: print("System Specs:\n " + platform.uname().system + ", " + platform.node() + ", " + platform.python_compiler()),
     "mlti": rand
 }
 
@@ -108,7 +109,7 @@ def eval_rc(code):
                     builta[arg[0]](arg)
                 except Exception as e:
                     print("builtin-core: error")
-                    #print(str(e))
+                    # print(str(e))
                 break;
             # print(arg)
             if not built:
