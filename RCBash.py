@@ -28,6 +28,8 @@ import datetime
 import pathlib
 import colorama
 
+HM=str(pathlib.Path().home())
+
 def dyn_color(argv: List[str]):
     if len(argv) >= 1:
         try:
@@ -47,7 +49,15 @@ evaluate.add_runtime_bind("time", time)
 evaluate.add_runtime_bind("clean", clean)
 evaluate.add_runtime_bind('fcolor', dyn_color)
 
+evaluate.uservars['HOME'] = HM
+
 def bmain():
+
+    #readline-additions
+    if pathlib.Path(HM + "/.rcbhistory").exists():
+        with open(HM + "/.rcbhistory") as f:
+            for i in f.readlines():
+                readline.add_history(i.strip())
     if pathlib.Path("./.rcbrc").exists():
         with open("./.rcbrc") as f:
             m = f.readlines()
@@ -155,6 +165,14 @@ def bmain():
                 inp = input((evaluate.uservars['agent'] if evaluate.uservars['agent'] != None else "agent") + " at " + evaluate.uservars['ps1'] if evaluate.uservars['ps1'] != None else '[ bash ] $')
 
             evaluate.eval_rc(inp)
+            if pathlib.Path(HM + "/.rcbhistory").exists():
+                hist = open(HM + "/.rcbhistory", "a")
+                hist.write("\n" + inp)
+                hist.close()
+            else:
+                hist = open(HM + "/.rcbhistory", "w")
+                hist.write(inp)
+                hist.close()
         except EOFError:
             print("logout")
             quit(-1) 
