@@ -31,6 +31,8 @@ Example:
 builtins ={}
 gotos ={}
 
+VERSION='0.0.1'
+
 class NVBasicException(Exception):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
@@ -171,13 +173,15 @@ def Interpreter():
 # RCBash Support
 
 def pluginInit(env):
+    print("Welcome to the NVBasic experience!\nNVBasic: Initializing funcs")
+    nvb_globalfuncs()
     if Path("./rcbrc.nvbas").exists():
+        
         chunk = open("./rcbrc.nvbas", "r")
         text = chunk.read()
 
         for m in text.split("\n"):
             nvbBuild(m)
-        
         chunk.close()
 
 def exitPlugin():

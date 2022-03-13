@@ -137,7 +137,7 @@ def bmain():
                         try:
                             mod = importlib.import_module("cache." + entry)
                         except Exception as e:
-                            print("Error occurred.")
+                            print("Error occurred.\n" + str(e))
                         # print(str(mod))
                         try:
                             if mod.VERSION != None:
