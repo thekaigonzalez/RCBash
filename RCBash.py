@@ -79,7 +79,7 @@ def bmain():
             for i in m:
                 evaluate.eval_rc(i.strip())
     def check(name, v):
-        return evaluate.uservars[name] == v
+        return evaluate.uservars.get(name) == v
 
     if check("g_efficiency", "true"):
         print("benutzend Deutsch tüchtigkeit")
@@ -164,7 +164,7 @@ def bmain():
             if evaluate.uservars.get("use-system-ps1") == "true":
                 inp = input("[ " + os.getcwd() + " ] $ ")
             else:
-                inp = input((evaluate.uservars['agent'] if evaluate.uservars['agent'] != None else "agent") + " at " + evaluate.uservars['ps1'] if evaluate.uservars['ps1'] != None else '[ bash ] $')
+                inp = input((evaluate.uservars.get("agent") if evaluate.uservars.get("agent") != None else "agent") + " at " + evaluate.uservars.get("ps1") if evaluate.uservars.get("ps1") != None else 'fallback $ ')
 
             evaluate.eval_rc(inp)
             if pathlib.Path(HM + "/.rcbhistory").exists():
