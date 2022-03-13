@@ -1,0 +1,7 @@
+#!/usr/bin/python3
+
+import shutil
+
+print("WARNING: This will remove all your plugins. This is irreversable!")
+
+shutil.rmtree("/etc/rcbash/Plugins")

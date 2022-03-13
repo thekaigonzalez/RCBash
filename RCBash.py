@@ -53,12 +53,14 @@ def time(argv: List[str]):
 def clean(argv: List[str]):
     print("WARNING: Cleaning the cache may lead to certain issues out of my control. Use wisely!")
     shutil.rmtree("cache")
+    #shutil.rmtree("/etc/rcbash/Plugins")
     os.mkdir("cache")
 
 evaluate.add_runtime_bind("time", time)
 evaluate.add_runtime_bind("clean", clean)
 evaluate.add_runtime_bind('fcolor', dyn_color)
 evaluate.add_runtime_bind('style', dyn_style)
+
 
 evaluate.uservars['HOME'] = HM
 
