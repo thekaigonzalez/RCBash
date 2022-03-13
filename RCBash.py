@@ -54,7 +54,7 @@ evaluate.add_runtime_bind('fcolor', dyn_color)
 evaluate.uservars['HOME'] = HM
 
 def bmain():
-
+    
     #readline-additions
     if pathlib.Path(HM + "/.rcbhistory").exists():
         with open(HM + "/.rcbhistory") as f:
@@ -80,6 +80,11 @@ def bmain():
                 evaluate.eval_rc(i.strip())
     def check(name, v):
         return evaluate.uservars.get(name) == v
+
+    if check("source-current", "true"):
+        print("sourcing current directory")
+        import sys
+        sys.path.append(os.getcwd())
 
     if check("g_efficiency", "true"):
         print("benutzend Deutsch tüchtigkeit")
