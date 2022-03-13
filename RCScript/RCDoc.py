@@ -85,6 +85,7 @@ def RCMD_FROMMD(markdown):
                     htm+="<p>" + buffer + "</p>\n"
                 buffer = ""
             
+            
         elif (ch == "*" and state == 0):
             buffer += "<b>"
             state = 200
@@ -132,8 +133,12 @@ def RCMD_FROMMD(markdown):
         elif (state == 12938213): raise Exception("Unfinished comment\nWhere: " + buffer + "\n      ^^")
     return htm
 
-def compileRCDocFile(filename):
+def compileRCDocFile(filename, sheet=None):
     file = open(filename, "r")
+    if sheet != None:
+        out = open(filename + ".html", "w")
+        out.write("<link href=\"" + sheet + "\">")
+        out.close()
     out = open(filename + ".html", "w")
     out.write(RCMD_FROMMD(file.read()))
     out.close()
