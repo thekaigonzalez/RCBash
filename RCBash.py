@@ -20,7 +20,9 @@ import RCScript.RCEval as evaluate
 import readline
 import os
 import importlib
+import RCScript.RCDoc as doc
 import subprocess
+import argparse
 import sys
 import time
 import datetime
@@ -180,4 +182,14 @@ def bmain():
             print()
             continue
 
-bmain()
+par = argparse.ArgumentParser("rcbash")
+par.add_argument("-u", default="NONNEEE")
+
+args = par.parse_args()
+
+if args.u != "NONNEEE":
+    print("Build doc")
+    if pathlib.Path(args.u).exists():
+        doc.compileRCDocFile(args.u)
+else:
+    bmain()

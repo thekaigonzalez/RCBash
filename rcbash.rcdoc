@@ -1,0 +1,11 @@
+-
+Copyright 2022 kaigonzalez
+ 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.-
+
+# RCBash
+
+RCBash is a utility written for *NIX* systems, with somewhat NT support, *if you try hard enough.*
+
+You can use RCBash like your normal terminal, just be sure to link your *LIBS* to prevent errors.

@@ -1,0 +1,21 @@
+- 
+These are comments, Essentially
+allowing users to type anything between two slashes (or little dashes)
+Anything's allowed here, anything outside of these are interpreted.
+These aren't shown in build, and are ignored at lex time.
+-
+
+
+# This is a basic Header
+## This is a header 2
+### this is the final header level
+
+*Simple Bold Text*
+
+
+
+
+This is a basic sentence,
+<br>
+Perfect!
+
