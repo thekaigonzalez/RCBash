@@ -22,7 +22,7 @@ function executeIfFileExist(src, callback) {
     xhr.open('HEAD', src)
 }
 function execute() {
-    var text = document.getElementById("document").textContent
+    var text = document.getElementById("document").value
     console.log(text)
     executeIfFileExist("https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md", function() {
         window.location = "https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md";  
