@@ -18,4 +18,4 @@
 
 Essentially, it's a stripped down version of Markdown made to fit RCBash's needs.
 
-You can compile it 
+You can compile it to HTML and link CSS Files with the API it provides.
