@@ -20,7 +20,7 @@ In RCBash, you are able to reference user variables as commands by using the AMP
 
 Example:
 
-
+$HOME <args>
 
 # RCBash - Referencing variables as commands (old method)
 
