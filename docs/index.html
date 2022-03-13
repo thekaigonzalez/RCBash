@@ -33,7 +33,7 @@ function execute() {
     var text = document.getElementById("document").value
     console.log(text)
     executeIfFileExist("https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md", function() {
-        window.location = "https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md";  
+        window.location.replace("https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md");  
     })
 }
         </script>
