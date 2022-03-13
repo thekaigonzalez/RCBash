@@ -137,9 +137,9 @@ def compileRCDocFile(filename, sheet=None):
     file = open(filename, "r")
     if sheet != None:
         out = open(filename + ".html", "w")
-        out.write("<link href=\"" + sheet + "\">")
+        out.write("<link href=\"" + sheet + "\">\n")
         out.close()
-    out = open(filename + ".html", "w")
+    out = open(filename + ".html", "a")
     out.write(RCMD_FROMMD(file.read()))
     out.close()
    

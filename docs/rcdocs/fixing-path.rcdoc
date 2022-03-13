@@ -3,10 +3,7 @@ Copyright 2022 kaigonzalez
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
- 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,4 +13,13 @@ limitations under the License.
 
 # Fixing RCBash Path Issues
 
-RCBash is written in Python, and uses local libraries to write 
+RCBash is written in Python, and uses local libraries to write data specially.
+
+The way to use the RCBash.py globally, is by setting PYTHONPATH to the directory of RCBash.
+
+Example:
+
+*export PYTHONPATH=$PYTHONPATH:/home/YOU/RCBash*
+
+This will allow RCBash to run the "RCScript" Library (a dependency for RCBash, RCBash is just the loader, RCScript is the official base lib)
+

@@ -188,13 +188,16 @@ def bmain():
             continue
 
 par = argparse.ArgumentParser("rcbash")
-par.add_argument("-u", default="NONNEEE")
-
+par.add_argument("-doc", default="NONNEEE")
+par.add_argument('-style', default="None")
 args = par.parse_args()
 
-if args.u != "NONNEEE":
+if args.doc != "NONNEEE":
     print("Build doc")
-    if pathlib.Path(args.u).exists():
-        doc.compileRCDocFile(args.u)
+    if pathlib.Path(args.doc).exists():
+        if (args.style != "None"):
+            doc.compileRCDocFile(args.doc, args.style)
+        else:
+            doc.compileRCDocFile(args.doc)
 else:
     bmain()
