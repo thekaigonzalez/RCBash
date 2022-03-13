@@ -11,20 +11,3 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-function executeIfFileExist(src, callback) {
-    var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = function() {
-        if (this.readyState === this.DONE) {
-            callback()
-        }
-    }
-    xhr.open('HEAD', src)
-}
-function execute() {
-    var text = document.getElementById("document").value
-    console.log(text)
-    executeIfFileExist("https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md", function() {
-        window.location = "https://thekaigonzalez.github.io/RCBash/manuals/" + text + ".md";  
-    })
-}
