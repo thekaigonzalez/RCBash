@@ -13,23 +13,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+import RCScript.RCEval as evaluate
+import RCScript.RCDoc as doc
+
 import platform
 import shutil
 from typing import List
-import RCScript.RCEval as evaluate
 if platform.system() == 'Linux':
     import readline
 import os
 import importlib
-import RCScript.RCDoc as doc
 import subprocess
 import argparse
-import sys
 import time
 import datetime
-# 
 import pathlib
-import colorama
 
 HM=str(pathlib.Path().home())
 
