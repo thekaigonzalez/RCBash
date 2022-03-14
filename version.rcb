@@ -14,4 +14,4 @@ printf "Branch version"
 fcolor RESET
 style NORMAL
 
-printf "1.5.5-source"
+printf "1.5.6"
