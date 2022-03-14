@@ -14,6 +14,10 @@
 
 # RCBash's attempt at a markdown parser (For documenting purposes)
 
+import os
+import pathlib
+
+
 def RCMD_FROMMD(markdown):
     """ 
     
@@ -93,13 +97,30 @@ def RCMD_FROMMD(markdown):
             buffer += "</b>"
             state = 0
         elif ch == "%" and state == 0:
+            if (state == 1):
+                
+                htm+='<h1>' + buffer.strip() + "</h1>"
+                buffer = ""
+                state = 0
+            elif (state == 2):
+                htm+='<h2>' + buffer.strip() + "</h2>"
+                buffer = ""
+                state = 0
+            elif (state == 3):
+                htm+='<h3>' + buffer.strip() + "</h3>"
+                buffer = ""
+                state = 0
+            elif(state==0):
+                if buffer.strip() != '':
+                    htm+="<p>" + buffer + "</p>"
+                buffer = ""
             htm += "<p>"
             state = 69
             buffer = ""
         elif ch == "%" and state == 69:
-
             htm += str(eval(buffer)) + "</p>\n"
             state = 0
+            buffer = ""
         else: 
             
             if ch == "#":
@@ -139,6 +160,8 @@ def compileRCDocFile(filename, sheet=None):
         out = open(filename + ".html", "w")
         out.write("<link rel=\"stylesheet\" href=\"" + sheet + "\">\n")
         out.close()
+    if (pathlib.Path(filename + ".html").exists()):
+        os.remove(filename + ".html")
     out = open(filename + ".html", "a")
     out.write(RCMD_FROMMD(file.read()))
     out.close()
