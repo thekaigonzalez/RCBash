@@ -71,7 +71,8 @@ def Interpreter():
     if pathlib.Path(HM + "/.rcbhistory").exists():
         with open(HM + "/.rcbhistory") as f:
             for i in f.readlines():
-                readline.add_history(i.strip())
+                if platform.system() == 'Linux':
+                    readline.add_history(i.strip())
     if pathlib.Path("./.rcbrc").exists():
         with open("./.rcbrc") as f:
             m = f.readlines()
