@@ -95,7 +95,7 @@ def RCMD_FROMMD(markdown):
         elif ch == "%" and state == 0:
             htm += "<p>"
             state = 69
-            #buffer = ""
+            buffer = ""
         elif ch == "%" and state == 69:
 
             htm += str(eval(buffer)) + "</p>\n"
