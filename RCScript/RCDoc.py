@@ -17,6 +17,7 @@
 import os
 import pathlib
 
+RCDOC_VERSION='0.0.5'
 
 def RCMD_FROMMD(markdown):
     """ 
