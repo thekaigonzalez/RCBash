@@ -14,10 +14,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from math import e
+import platform
 import shutil
 from typing import List
 import RCScript.RCEval as evaluate
-import readline
+if platform.system() == 'Linux':
+    import readline
 import os
 import importlib
 import RCScript.RCDoc as doc
