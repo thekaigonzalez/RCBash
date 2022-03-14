@@ -1,0 +1,86 @@
+#!/usr/bin/python3
+
+from os import DirEntry
+import os
+import pathlib
+import shutil
+import sys
+import argparse
+import glob
+import json
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("DIRECTORY", help="The directory to generate your site from")
+parser.add_argument("-cleanhtml", help="Remove all .HTML files in the directory (and export_web)", action="store_true", default=False)
+parser.add_argument("-lib", help="THIS IS REQUIRED! this is the RCBash library to generate using. This is checked!", default=None)
+parser.add_argument("-sheet", help="set the default stylesheet, does not work for files in File-Exclude", default=None)
+parser.add_argument("-dir", help="The default export directory. Usually export_web is fine for production.", default="export_web")
+parser.description = "Generate a static Python RCBash-powered website."
+
+args = parser.parse_args()
+
+if not args.DIRECTORY.endswith('/'):
+    args.DIRECTORY += '/'
+print("Stating site...")
+sitefile = args.DIRECTORY + "rcsite.json"
+
+if pathlib.Path(sitefile).exists() and args.cleanhtml == False:
+    if pathlib.Path(args.DIRECTORY + args.dir).exists():
+        shutil.rmtree(args.DIRECTORY + args.dir)
+
+    file = open(sitefile)
+    f = json.load(file)
+
+    if not f.get("Name"):
+        print("error: could not find `Name' property (this is required)")
+        exit(-1)
+    print("Building Site...")
+
+    print("Stating files. . .")
+    if (f.get("Files") == None): print("error: Could not stat the default 'Files'. Program Terminated.");exit(-1);
+    for i in f["Files"]:
+        print("Compiling: " + i)
+        if args.lib != None:
+            sys.path.append(args.lib)
+            import RCScript.RCDoc as rcdoc
+            print("RCBash RCDoc version " + rcdoc.RCDOC_VERSION)
+            OUTPUT = args.DIRECTORY + args.dir + "/"
+            if not pathlib.Path(OUTPUT).exists():
+                os.mkdir(OUTPUT)
+            if args.sheet != None:
+                print("styles")
+                rcdoc.compileRCDocFile(args.DIRECTORY + i, args.sheet)
+            else:
+                rcdoc.compileRCDocFile(args.DIRECTORY + i)
+            
+            os.rename(args.DIRECTORY + i + ".html", OUTPUT + i[0:i.find(".")] + ".html")
+    if f.get("File-Exclude") != None:
+        for i in f["File-Exclude"]:
+            print("Compiling Excluded Sheet: " + i)
+            if args.lib != None:
+                sys.path.append(args.lib)
+                
+                import RCScript.RCDoc as rcdoc
+                
+                print("RCBash RCDoc version " + rcdoc.RCDOC_VERSION)
+                
+                OUTPUT = args.DIRECTORY + args.dir + "/"
+                
+                if not pathlib.Path(OUTPUT).exists():
+                    os.mkdir(OUTPUT)
+
+                rcdoc.compileRCDocFile(args.DIRECTORY + i)
+                
+                os.rename(args.DIRECTORY + i + ".html", OUTPUT + i[0:i.find(".")] + ".html")
+
+    file.close()
+
+if args.cleanhtml == True:
+    lst = glob.glob(args.DIRECTORY + "*.html")
+
+    for i in lst:
+        os.remove(i)
+    if pathlib.Path(args.DIRECTORY + "export_web").exists():
+        shutil.rmtree(args.DIRECTORY + "export_web")
+    exit(0)
