@@ -57,7 +57,8 @@ if (args.install == True):
     print("Installing plugins...")
     if pathlib.Path("plugins").exists():
         print("Found local plugins directory! installing to /etc/rcbash/Plugins")
-        shutil.rmtree('/etc/rcbash/Plugins')
+        if (pathlib.Path("/etc/rcbash/Plugins").exists()):
+            shutil.rmtree('/etc/rcbash/Plugins')
         shutil.copytree("plugins/", "/etc/rcbash/Plugins")
         print("Finished copying directory.")
     else:
