@@ -16,4 +16,4 @@ param($name, $dir)
 
 echo "Running software"
 
-python3 .\Software\$dir\$name
+python .\Software\$dir\$name
