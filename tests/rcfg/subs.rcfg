@@ -1,0 +1,7 @@
+# Substring
+
+str = "blah blah blah | Hello, world | "
+
+substring1 = std:string:strip(std:string:sub(str, 16, 29));
+
+std:println("substring:", substring1)

@@ -1,0 +1,5 @@
+f = std:input(">>");
+
+std:println(f);
+
+std:assert(std:bool(f, "Hello there!"))
