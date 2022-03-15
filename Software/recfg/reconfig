@@ -40,7 +40,5 @@ else:
 if pathlib.Path(args.FILE).exists():
     f = open(args.FILE, "r")
     if args.append != None:
-        print("app")
         sys.path.append(args.append)
-        print(sys.path)
     rcfg.rcfg_rstatstring(f.read())
