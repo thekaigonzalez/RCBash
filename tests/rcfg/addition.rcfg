@@ -1,8 +1,8 @@
 one = 1;
 two = 2;
 
-three = return(std:add(one, two))
 
-std:println(builtins)
+three = std:add(one, two);
+println = std:println;
 
-std:println(three)
+println(three)

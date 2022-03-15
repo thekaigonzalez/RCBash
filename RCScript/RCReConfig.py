@@ -110,7 +110,7 @@ def __rcfg_absd(c):
 def RC_LexerErr(msg):
     print("Error When Lexing/Parsing: " + msg)
 
-def __exec_rcfg(chu):
+def __exec_rcfg(chu, rfv=False):
     """
     ## Execute RConfig Code
 
@@ -141,6 +141,7 @@ def __exec_rcfg(chu):
             pass
         for char in chu:
             if char == "(" and state == 0:
+                
                 if vb.strip() == "return":
                     flag = "RETURN"
 
@@ -169,6 +170,8 @@ def __exec_rcfg(chu):
             
             elif char == ')' and state == 1:
                 state = 5
+
+                
                 
                 if (len(vb) != 0 and vb.strip() != ''): args.append(vb)
                 
@@ -177,6 +180,9 @@ def __exec_rcfg(chu):
                         args[idx] = __exec_rcfg(i.strip())
                         idx += 1
                 
+                if rfv == True:
+                    return cfunc(args)
+
                 if flag == "RETURN":
                     return args[0]
                 else:
@@ -188,7 +194,7 @@ def __exec_rcfg(chu):
 
             elif char == ';' or char == '\n' and state == 5 and state != 81:
                 if state == 81:
-                    builtins[name] = __exec_rcfg(value.strip());
+                    builtins[name] = __exec_rcfg(value.strip(), True);
                 value = ""
                 state = 0
                 cfunc = None
@@ -205,7 +211,7 @@ def __exec_rcfg(chu):
             elif char == '\n' or char == ';' and state == 81:
                 
                 if state == 81:
-                    builtins[name] = __exec_rcfg(value.strip());
+                    builtins[name] = __exec_rcfg(value.strip(), True);
                 state = 0
                 cfunc = None
                 vb = ""
