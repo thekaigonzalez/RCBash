@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Copyright 2022 kaigonzalez
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +16,6 @@
 
 import pathlib
 import sys
-import RCScript.RCReConfig as rcfg
 
 
 import argparse
@@ -22,9 +23,19 @@ import argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument("FILE", help="File to execute.")
-parser.add_argument("-append", help="append A directory to lib", default=None)
+parser.add_argument("-append", help="append A directory to lib for std:lib candidates", default=None)
+parser.add_argument("-lib", help="Version of ReConfiguration to use, if not specified, it will not work correctly.", default=None)
 
 args = parser.parse_args()
+
+rcfg_version = ""
+
+if (args.lib != None):
+    sys.path.append(args.lib)
+    import RCScript.RCReConfig as rcfg
+else:
+    print("error: lib not specified")
+    exit(-1)
 
 if pathlib.Path(args.FILE).exists():
     f = open(args.FILE, "r")
