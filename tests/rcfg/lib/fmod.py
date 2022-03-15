@@ -12,24 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pathlib
-import sys
-import RCScript.RCReConfig as rcfg
+import playsound
 
+TYPE='full-lib'
+NAME="fmod"
 
-import argparse
+def fmod_play(args):
+    playsound.playsound("test.mp3")
 
-parser = argparse.ArgumentParser()
+obj = {
+    'play': fmod_play
+}
 
-parser.add_argument("FILE", help="File to execute.")
-parser.add_argument("-append", help="append A directory to lib", default=None)
-
-args = parser.parse_args()
-
-if pathlib.Path(args.FILE).exists():
-    f = open(args.FILE, "r")
-    if args.append != None:
-        print("app")
-        sys.path.append(args.append)
-        print(sys.path)
-    rcfg.rcfg_rstatstring(f.read())
+rcfg_registers = obj

@@ -1,0 +1,3 @@
+std:lib("fmod")
+
+fmod:play()

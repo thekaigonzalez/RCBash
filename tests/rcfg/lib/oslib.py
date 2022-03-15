@@ -12,24 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pathlib
-import sys
-import RCScript.RCReConfig as rcfg
+import os
 
 
-import argparse
+TYPE='full-lib'
+NAME='os'
 
-parser = argparse.ArgumentParser()
+def os_system(args):
+    os.system(args[0])
 
-parser.add_argument("FILE", help="File to execute.")
-parser.add_argument("-append", help="append A directory to lib", default=None)
+def os_mkdir(args):
+    os.mkdir(args[0])
 
-args = parser.parse_args()
+def os_remove(args):
+    os.remove(args[0])
 
-if pathlib.Path(args.FILE).exists():
-    f = open(args.FILE, "r")
-    if args.append != None:
-        print("app")
-        sys.path.append(args.append)
-        print(sys.path)
-    rcfg.rcfg_rstatstring(f.read())
+def os_rename(args):
+    os.rename(args[0], args[1])
+
+rcfg_registers = {
+    'system': os_system,
+    'remove': os_remove,
+    'mkdir': os_remove,
+    'rename': os_rename
+}

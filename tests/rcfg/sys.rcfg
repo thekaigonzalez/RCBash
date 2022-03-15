@@ -1,0 +1,5 @@
+std:lib("oslib");
+
+os:system("help");
+
+os:rename("version1.rcb", "version.rcb");

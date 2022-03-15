@@ -140,7 +140,17 @@ def std_loadlib(args):
     }
     
     """
-    print()
+    import importlib
+
+    try:
+
+        mod = importlib.import_module(args[0])
+
+        if type(mod.rcfg_registers) == dict:
+            if mod.TYPE == 'full-lib':
+                builtins[mod.NAME] = mod.rcfg_registers
+    except Exception:
+        print("std:lib - Failed to import library `" + args[0] + "'")
 
 def std_cmp(args):
     """
@@ -297,8 +307,8 @@ def __exec_rcfg(chu, rfv=False):
                         return args[0]
                     else:
                         cfunc(args)
-                except Exception:
-                    print("Error when evaluating: Unable to load Function. Refer to above errors (if any)")
+                except Exception as e:
+                    print("Error when evaluating: Unable to load Function. Refer to above errors (if any)\nOr Refer to this message: " + str(e))
                 
                 
                 vb = ""
