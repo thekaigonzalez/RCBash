@@ -29,16 +29,35 @@ Lexer:
 """
 import sys
 import types
+from typing import List
 
 true = True
 false = False
 
+""" STD LIBRARY """
 def std_println(args):
+    """
+    std:println(...) - ReConfiguration Standard Library
+
+    Appends every argument to stdout with a space.
+    """
     for i in args:
         sys.stdout.write(str(i) + " ")
     print()
 
 def std_assert(args):
+    """
+    std:assert(stat) - ReConfiguration Standard Library
+
+    Basic assert using builtin types
+
+    Takes only 1 argument: bool
+
+    Will exit if "stat" is not true. "stat" can be a ReConfiguration Function however; 
+    If you need specific variables then check std:assertcmp
+
+    
+    """
     if len(args) == 0: pass # undefined behaviour
     if (args[0] == True): 
         pass
@@ -47,6 +66,12 @@ def std_assert(args):
         exit(-1)
 
 def std_assertcmp(args):
+    """
+    std:assertcmp(one, two) - ReConfiguration Standard Library
+
+    std:assert() but instead of comparing a single return value, the comparison is done at runtime.
+
+    """
     if len(args) != 2: pass # undefined behaviour
     if (args[0] == args[1]):
         pass
@@ -55,12 +80,86 @@ def std_assertcmp(args):
         exit(-1)
 
 def std_chunkit(args):
+    """
+    std:chunkit(func, ...) - ReConfiguration Standard Library
+
+    Chunk and run a function programmatically with positional args (...)
+    
+    """
     if len(args) != 1: pass
     args[0](args[1:])
 
 def std_add(args):
     # if len(args) != 2: pass
     return args[0] + args[1]
+
+def std_string_sub(args: List[str]):
+    """ 
+    std:string:sub(str, one, two) - ReConfiguration Standard Library
+    
+    Get text within two characters (or indices) of a string.
+    
+    """
+    if len(args) != 3: pass # undefined behavior
+    return args[0][args[1]:args[2]]
+
+
+
+def std_string_strip(args):
+    """
+    std:string:strip(string) - ReConfiguration Standard Library
+    
+    """
+    return args[0].strip()
+
+def std_input(args):
+    """
+    std:input(prompt) - ReConfiguration Standard Library
+
+    Returns input with given prompt.
+    """
+    return input(args[0])
+
+def std_loadlib(args):
+    """
+    std:loadlib(lib) - ReConfiguration Standard Library
+
+    Load a Python module's functions.
+
+    When loading the module, it'll look for rcfg_registers and append those to the current session.
+
+    a typical mod would look like:
+
+    \# mod file
+
+    def myfunc():
+        print("hi!")
+
+    rcfg_registers = {
+        "func1": myfunc
+    }
+    
+    """
+    print()
+
+def std_cmp(args):
+    """
+    std:cmp(one, two, func, ...) - ReConfiguration Standard Library
+
+    Combines std:chunkit with std:asert
+
+    if one and two are the same, then it will run "func" with any positional arguments (...)
+    
+    """
+    if len(args) != 3: pass
+
+    if args[0] == args[1]:
+        args[2](args[3:])
+
+def std_bool(args):
+    if args[0] == args[1]: return True
+    else: return False
+
 builtins = {
     "std": {
         "println": std_println,
@@ -68,7 +167,15 @@ builtins = {
         "assert": std_assert,
         "assertcmp": std_assertcmp,
         "chunkit": std_chunkit,
-        "add": std_add
+        "add": std_add,
+        "string": {
+            "sub": std_string_sub,
+            "strip": std_string_strip
+        },
+        "cmp": std_cmp,
+        "lib": std_loadlib,
+        "input": std_input,
+        "bool": std_bool
     }
 
 }
@@ -131,6 +238,7 @@ def __exec_rcfg(chu, rfv=False):
         try:
             if type(__rcfg_absd(chu.strip())) is not None:
                 return __rcfg_absd(chu.strip())
+
             
         except:
             pass
@@ -140,14 +248,16 @@ def __exec_rcfg(chu, rfv=False):
         except:
             pass
         for char in chu:
-            if char == "(" and state == 0:
-                
-                if vb.strip() == "return":
-                    flag = "RETURN"
+            if char == "(" and state == 0 and len(vb.strip())!=0:
+                try:
+                    if vb.strip() == "return":
+                        flag = "RETURN"
 
-                    # cfunc = "return"
-                else:
-                    cfunc = __rcfg_absd(vb.strip())
+                        # cfunc = "return"
+                    else:
+                        cfunc = __rcfg_absd(vb.strip())
+                except KeyError:
+                    print("error: function/object not found `" + vb.strip() + "'")
 
                 state = 1
                 vb = ""
@@ -177,17 +287,18 @@ def __exec_rcfg(chu, rfv=False):
                 
                 idx = 0
                 for i in args:
-                        args[idx] = __exec_rcfg(i.strip())
+                        args[idx] = __exec_rcfg(i.strip(), True)
                         idx += 1
-                
-                if rfv == True:
-                    return cfunc(args)
+                try:
+                    if rfv == True:
+                        return cfunc(args)
 
-                if flag == "RETURN":
-                    return args[0]
-                else:
-                    
-                    cfunc(args)
+                    if flag == "RETURN":
+                        return args[0]
+                    else:
+                        cfunc(args)
+                except Exception:
+                    print("Error when evaluating: Unable to load Function. Refer to above errors (if any)")
                 
                 
                 vb = ""
@@ -236,5 +347,4 @@ def __exec_rcfg(chu, rfv=False):
                     vb += char
     
 def rcfg_rstatstring(strn):
-    
     __exec_rcfg(strn)
