@@ -1,0 +1,3 @@
+# Test std:chunkit
+
+std:chunkit(std:println, "hello")
