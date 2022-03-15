@@ -149,8 +149,8 @@ def std_loadlib(args):
         if type(mod.rcfg_registers) == dict:
             if mod.TYPE == 'full-lib':
                 builtins[mod.NAME] = mod.rcfg_registers
-    except Exception:
-        print("std:lib - Failed to import library `" + args[0] + "'")
+    except Exception as e:
+        print("std:lib - Failed to import library `" + args[0] + "'\nError Message: " + str(e))
 
 def std_cmp(args):
     """
