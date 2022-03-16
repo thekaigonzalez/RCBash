@@ -24,7 +24,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("FILE", help="File to execute.")
 parser.add_argument("-append", help="append A directory to lib for std:lib candidates", default=None)
-parser.add_argument("-lib", help="Version of ReConfiguration to use, if not specified, it will not work correctly.", default=None)
+parser.add_argument("-lib", help="Version of ReConfiguration to use, if not specified, it will not work correctly (UNLESS YOU HAVE IT ON PATH)", default=None)
 
 args = parser.parse_args()
 
@@ -34,8 +34,9 @@ if (args.lib != None):
     sys.path.append(args.lib)
     import RCScript.RCReConfig as rcfg
 else:
-    print("error: lib not specified")
-    exit(-1)
+    print("Warning: lib not specified")
+    
+import RCScript.RCReConfig as rcfg
 
 if pathlib.Path(args.FILE).exists():
     f = open(args.FILE, "r")
