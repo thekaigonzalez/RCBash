@@ -176,6 +176,39 @@ def std_length(args):
 def std_multiply(args):
     return args[0] * args[1]
 
+def std_macro(args):
+    strs= args[1]
+    def exec(args):
+        __exec_rcfg(strs)
+    builtins[args[0]] = exec
+
+def std_fwrite(args, fsile):
+    fsile.write(args[0])
+
+def std_fread(args, fsile):
+    return fsile.read()
+
+def std_fclose(args, file):
+    file.close()
+
+def std_file(args):
+    fsile = open(args[0], args[1])
+    def loadwrite(args):
+        std_fwrite(args, fsile)
+    
+    def loadread(args):
+        return std_fread(args, fsile);
+
+    def loadclose(args):
+        std_fclose(args, fsile);
+        
+    return {
+        'write': loadwrite,
+        'read': loadread,
+        'close': loadclose
+    }
+
+
 builtins = {
     "std": {
         "println": std_println,
@@ -193,7 +226,9 @@ builtins = {
         "input": std_input,
         "bool": std_bool,
         "length": std_length,
-        "multiply": std_multiply
+        "multiply": std_multiply,
+        "macro": std_macro,
+        "file": std_file
     }
 
 }
@@ -309,6 +344,7 @@ def __exec_rcfg(chu, rfv=False):
                         idx += 1
                 try:
                     if rfv == True:
+
                         return cfunc(args)
 
                     if flag == "RETURN":
@@ -317,8 +353,7 @@ def __exec_rcfg(chu, rfv=False):
                         cfunc(args)
                 except Exception as e:
                     print("Error when evaluating: Unable to load Function. Refer to above errors (if any)\nOr Refer to this message: " + str(e))
-                
-                
+
                 vb = ""
 
             elif char == ';' or char == '\n' and state == 5 and state != 81:

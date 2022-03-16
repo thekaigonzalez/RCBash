@@ -1,0 +1,5 @@
+sf = std:file("test.txt", "r");
+
+text = sf:read()
+
+std:println(text);
