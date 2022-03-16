@@ -1,0 +1,13 @@
+# check for argv
+able = True
+# If you have argv (usually std argv)
+@if std:assertnil(std:argv) {
+    able = False;
+}
+
+std:println("hello");
+
+
+@if able {
+    std:println("Did you have ARGV?");
+}

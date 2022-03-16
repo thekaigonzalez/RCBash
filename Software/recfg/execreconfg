@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+
+import RCScript.RCReConfig as recfg
+
+import sys
+
+f = open(sys.argv[1])
+
+recfg.rcfg_rstatstring(f.read(), False)
+
+f.close()
