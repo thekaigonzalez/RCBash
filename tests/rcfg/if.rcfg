@@ -1,0 +1,3 @@
+@if std:bool(1,1) {
+    std:println("hello!");
+}

@@ -41,7 +41,7 @@ true = True
 false = False
 
 """ STD LIBRARY """
-def std_println(args):
+def __stdprintln(args):
     """
     std:println(...) - ReConfiguration Standard Library
 
@@ -51,7 +51,7 @@ def std_println(args):
         sys.stdout.write(str(m))
     print()
 
-def std_assert(args):
+def __stdassert(args):
     """
     std:assert(stat) - ReConfiguration Standard Library
 
@@ -71,7 +71,7 @@ def std_assert(args):
         print("error: Assert failed!\nwhat(): " + str(args[0]) + " != 1")
         exit(-1)
 
-def std_assertcmp(args):
+def __stdassertcmp(args):
     """
     std:assertcmp(one, two) - ReConfiguration Standard Library
 
@@ -85,7 +85,7 @@ def std_assertcmp(args):
         print("error: Assert failed!\nwhat(): " + str(args[0]) + " != " + str(args[1]))
         exit(-1)
 
-def std_chunkit(args):
+def __stdchunkit(args):
     """
     std:chunkit(func, ...) - ReConfiguration Standard Library
 
@@ -95,11 +95,11 @@ def std_chunkit(args):
     if len(args) != 1: pass
     args[0](args[1:])
 
-def std_add(args):
+def __stdadd(args):
     # if len(args) != 2: pass
     return args[0] + args[1]
 
-def std_string_sub(args: List[str]):
+def __stdstring_sub(args: List[str]):
     """ 
     std:string:sub(str, one, two) - ReConfiguration Standard Library
     
@@ -111,14 +111,14 @@ def std_string_sub(args: List[str]):
 
 
 
-def std_string_strip(args):
+def __stdstring_strip(args):
     """
     std:string:strip(string) - ReConfiguration Standard Library
     
     """
     return args[0].strip()
 
-def std_input(args):
+def __stdinput(args):
     """
     std:input(prompt) - ReConfiguration Standard Library
 
@@ -126,7 +126,7 @@ def std_input(args):
     """
     return input(args[0])
 
-def std_loadlib(args):
+def __stdloadlib(args):
     """
     std:loadlib(lib) - ReConfiguration Standard Library
 
@@ -158,7 +158,7 @@ def std_loadlib(args):
     except Exception as e:
         print("std:lib - Failed to import library `" + args[0] + "'\nError Message: " + str(e))
 
-def std_cmp(args):
+def __stdcmp(args):
     """
     std:cmp(one, two, func, ...) - ReConfiguration Standard Library
 
@@ -172,20 +172,20 @@ def std_cmp(args):
     if args[0] == args[1]:
         args[2](args[3:])
 
-def std_bool(args):
+def __stdbool(args):
     """ Compares arg0, and arg1. """
     if args[0] == args[1]: return True
     else: return False
 
-def std_length(args):
+def __stdlength(args):
     """ length arg0 """
     return len(args[0])
 
-def std_multiply(args):
+def __stdmultiply(args):
     """ arg0 * arg1 """
     return args[0] * args[1]
 
-def std_macro(args):
+def __stdmacro(args):
     """
     Bind a function
     """
@@ -194,23 +194,23 @@ def std_macro(args):
         __exec_rcfg(strs)
     builtins[args[0]] = exec
 
-def std_fwrite(args, fsile):
+def __stdfwrite(args, fsile):
     """
     Write to a file.
     """
     fsile.write(args[0])
 
-def std_fread(args, fsile):
+def __stdfread(args, fsile):
     """
     Read a file's contents
     
     """
     return fsile.read()
 
-def std_fclose(args, file):
+def __stdfclose(args, file):
     file.close()
 
-def std_fexists(args):
+def __stdfexists(args):
     """
     std:exists(path) - ReConfiguration Standard Library 
 
@@ -222,7 +222,7 @@ def std_fexists(args):
     if pathlib.Path(args[0]).exists(): return True
     else: return False
 
-def std_file(args):
+def __stdfile(args):
     """
     std:file(name, mode) - ReConfiguration Standard Library
     
@@ -233,13 +233,13 @@ def std_file(args):
     fsile = open(args[0], args[1])
 
     def loadwrite(args):
-        std_fwrite(args, fsile)
+        __stdfwrite(args, fsile)
     
     def loadread(args):
-        return std_fread(args, fsile);
+        return __stdfread(args, fsile);
 
     def loadclose(args):
-        std_fclose(args, fsile);
+        __stdfclose(args, fsile);
         
     return {
         'write': loadwrite,
@@ -247,7 +247,7 @@ def std_file(args):
         'close': loadclose
     }
 
-def std_info(args):
+def __stdinfo(args):
     """
     std:info() - ReConfiguration Standard Library
 
@@ -270,29 +270,45 @@ def std_info(args):
         'uname': platform.system()
     }
 
+def __stdassertnil(args):
+    return args[0] == None
+
+def __stdmember(args):
+    return args[0][args[1]]
+
+def __stdexit(args):
+    exit(args[0])
+
+def __not(args):
+    return args[0] == False
+
 builtins = {
     "std": {
-        "println": std_println,
+        "println": __stdprintln,
         "VERSION": '0.1',
-        "assert": std_assert,
-        "assertcmp": std_assertcmp,
-        "chunkit": std_chunkit,
-        "add": std_add,
+        "assert": __stdassert,
+        "assertcmp": __stdassertcmp,
+        "chunkit": __stdchunkit,
+        "add": __stdadd,
         "string": {
-            "sub": std_string_sub,
-            "strip": std_string_strip
+            "sub": __stdstring_sub,
+            "strip": __stdstring_strip
         },
-        "cmp": std_cmp,
-        "lib": std_loadlib,
-        "input": std_input,
-        "bool": std_bool,
-        "length": std_length,
-        "multiply": std_multiply,
-        "macro": std_macro,
-        "file": std_file,
-        "info": std_info,
-        "exists": std_fexists
-    }
+        "cmp": __stdcmp,
+        "lib": __stdloadlib,
+        "input": __stdinput,
+        "bool": __stdbool,
+        "length": __stdlength,
+        "multiply": __stdmultiply,
+        "macro": __stdmacro,
+        "file": __stdfile,
+        "info": __stdinfo,
+        "exists": __stdfexists,
+        "assertnil": __stdassertnil,
+        "argv": sys.argv,
+        "member": __stdmember
+    },
+    "not": __not
 
 }
 
@@ -333,7 +349,7 @@ def __rcfg_absd(c):
 def RC_LexerErr(msg):
     print("Error When Lexing/Parsing: " + msg)
 
-def __exec_rcfg(chu, rfv=False):
+def __exec_rcfg(chu: str, rfv=False, debug=False):
     """
     ## Execute RConfig Code
 
@@ -344,11 +360,16 @@ def __exec_rcfg(chu, rfv=False):
         """DECL"""
         vb = ""
         state = 0
+        db_prevstate = state
         cfunc = ""
         flag = None
         args = [] #tmp arg holder (deleted after)
         name = ""
         value = ""
+        prevst = 0
+        stch = ""
+        STCHF=False
+        COLLECTING=False
         chu = chu.strip()
         
         try:
@@ -364,7 +385,10 @@ def __exec_rcfg(chu, rfv=False):
         except:
             pass
         for char in chu:
+            
             if char == "(" and state == 0 and len(vb.strip())!=0:
+                if debug:
+                    print("[FUNCTION-CALL] for " + vb.strip())
                 try:
                     if vb.strip() == "return":
                         flag = "RETURN"
@@ -382,15 +406,56 @@ def __exec_rcfg(chu, rfv=False):
                 state += 10
                 vb += "("
 
-            elif char == '(' and state != 1 and state != 5 and state != 69 and state != 81:
+            elif char == '(' and state != 1 and state != 5 and state != 69 and state != 81 and state != 6722 and state != 672:
+                if debug:
+                    print("[LEXER] Adding 10 to state because of: " + char)
                 state += 10
                 vb += "("
             
             elif char == "," and state == 1:
                 args.append(vb)
                 vb = ""
+            elif char == '@' and state == 0:
+                if debug:
+                    print("[SPECIAL-TOKEN] macro token " + char)
+                state = 43
+                vb = ""
+            elif char == ' ' and state == 43:
+                if debug:
+                    print("[MACRO] Loading macro functionality for " + vb.strip())
+                if vb.strip() == 'if':
+                    state =672
+                    vb = ""
+                else:
+                    print("unknown directive macro.")
+                    exit(-1)
+                vb = ""
+            elif char == '{' and state == 672:
+                if debug:
+                    print('[COMPARE] checking ' + vb.strip())
+    
+                state = 6722
+                COLLECTING=True
+                STCHF= __exec_rcfg(vb.strip(), True)
+                if debug:
+                    print("[COMPARE] tried once, got " + str(__exec_rcfg(vb.strip(), True)))
+                vb = ""
+            elif char == '}' and state == 6722:
+                if debug:
+                    print("[TOKEN] found end of block, loading code:\n" + stch.strip())
+                state = 0
 
-            elif char == ")" and state != 1 and state != 5 and state != 69 and state != 81:
+                if STCHF:
+                    __exec_rcfg(stch.strip())
+                vb = ""
+                STCHF = False
+                COLLECTING = False
+                args = []
+                
+
+            elif char == ")" and state != 1 and state != 5 and state != 69 and state != 81 and state != 6722 and state != 672:
+                if debug:
+                    print("[LEXER] removing 10 from state because of " + char)
                 state -= 10
                 vb += ")"
             
@@ -399,68 +464,92 @@ def __exec_rcfg(chu, rfv=False):
 
                 
                 
+                
                 if (len(vb) != 0 and vb.strip() != ''): args.append(vb)
                 
                 idx = 0
                 for i in args:
                         args[idx] = __exec_rcfg(i.strip(), True)
                         idx += 1
+                if debug:
+                    print("[FUNCTION] executing function with args - " + str(args))
                 try:
+                    
                     if rfv == True:
 
                         return cfunc(args)
-
+                    
                     if flag == "RETURN":
                         return args[0]
                     else:
                         cfunc(args)
+                    
                 except Exception as e:
                     print("Error when evaluating: Unable to load Function. Refer to above errors (if any)\nOr Refer to this message: " + str(e))
 
-                vb = ""
+                
 
-            elif char == ';' or char == '\n' and state == 5 and state != 81:
-                if state == 81:
-                    builtins[name] = __exec_rcfg(value.strip(), True);
-                value = ""
-                state = 0
-                cfunc = None
                 vb = ""
-                args = []
-                
-                
+            
+            elif char == ';' or char == '\n' and state == 5 and not COLLECTING:
+                if debug: print("[STATEMENT] Found newline on state: " + str(state))
+                if COLLECTING:
+                    state = 6722
+                    stch += char
+                    
+                else:
+                    if state == 81:
+                        builtins[name] = __exec_rcfg(value.strip(), True);
+                    value = ""
+                    state = 0
+                    cfunc = None
+                    vb = ""
+                    args = []
 
             elif char == '=' and state == 0:
                 state = 81
                 name = vb.strip()
                 vb = ""
 
-            elif char == '\n' or char == ';' and state == 81:
-                
-                if state == 81:
-                    builtins[name] = __exec_rcfg(value.strip(), True);
-                state = 0
-                cfunc = None
-                vb = ""
-                args = []
-                value = ""
-                
-                
-                vb = ""
-                state = 0
+            elif char == '\n' or char == ';' and state == 81 and state != 6722 and not COLLECTING:
+                if COLLECTING:
+                    state = 6722
+                    stch += char
+                else:
+                    if debug:
+                        print("[CHUNK] End of line found, old state: " + str(state) + ", Collection Status: " + str(COLLECTING))
+                    if state == 81:
+                        builtins[name] = __exec_rcfg(value.strip(), True);
+                        
+                    state = 0
+                    cfunc = None
+                    vb = ""
+                    args = []
+                    value = ""
+                    
+                    
+                    vb = ""
+                    state = 0
 
             elif char == '#' and state == 0:
                 state = 69
                 vb = ""
             elif char == '\n' and state == 69:
+                if debug:
+                    print("[COMEMNT] Ended comment")
                 state = 0
-                
                 vb=""
             else:
                 if state == 69: vb = ""
                 elif state == 81: value += char
+                elif state == 6722: stch += char
                 else:
                     vb += char
+            if db_prevstate != state and debug:
+                char2 = char
+                if char2 == '\n': char2 = '\\n'
+                print('[STATE-CHANGED] state changed to ' + str(state) + " on `" + char2 + "' from " + str(db_prevstate))
+                db_prevstate = state
     
-def rcfg_rstatstring(strn):
-    __exec_rcfg(strn)
+def rcfg_rstatstring(strn, ifd=False):
+    __exec_rcfg(strn, debug=ifd)
