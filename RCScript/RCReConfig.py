@@ -27,8 +27,14 @@ Lexer:
 <statement>; <--- Semicolon
 
 """
+import getpass
+from platform import platform
+import platform
+import psutil
+import os
 import sys
 import types
+import pathlib
 from typing import List
 
 true = True
@@ -41,8 +47,8 @@ def std_println(args):
 
     Appends every argument to stdout with a space.
     """
-    for i in args:
-        sys.stdout.write(str(i) + " ")
+    for m in args:
+        sys.stdout.write(str(m))
     print()
 
 def std_assert(args):
@@ -167,33 +173,65 @@ def std_cmp(args):
         args[2](args[3:])
 
 def std_bool(args):
+    """ Compares arg0, and arg1. """
     if args[0] == args[1]: return True
     else: return False
 
 def std_length(args):
+    """ length arg0 """
     return len(args[0])
 
 def std_multiply(args):
+    """ arg0 * arg1 """
     return args[0] * args[1]
 
 def std_macro(args):
+    """
+    Bind a function
+    """
     strs= args[1]
     def exec(args):
         __exec_rcfg(strs)
     builtins[args[0]] = exec
 
 def std_fwrite(args, fsile):
+    """
+    Write to a file.
+    """
     fsile.write(args[0])
 
 def std_fread(args, fsile):
+    """
+    Read a file's contents
+    
+    """
     return fsile.read()
 
 def std_fclose(args, file):
     file.close()
 
-def std_file(args):
-    fsile = open(args[0], args[1])
+def std_fexists(args):
+    """
+    std:exists(path) - ReConfiguration Standard Library 
+
+    check if the path exists (only path)
+
+    No std:file objects allowed currently.
     
+    """
+    if pathlib.Path(args[0]).exists(): return True
+    else: return False
+
+def std_file(args):
+    """
+    std:file(name, mode) - ReConfiguration Standard Library
+    
+    The file object
+
+    A wrapper around the open() function in Python
+    """
+    fsile = open(args[0], args[1])
+
     def loadwrite(args):
         std_fwrite(args, fsile)
     
@@ -209,6 +247,28 @@ def std_file(args):
         'close': loadclose
     }
 
+def std_info(args):
+    """
+    std:info() - ReConfiguration Standard Library
+
+    std:info returns a Information object.
+
+    Conatins 
+
+    Information.cpus
+    Infomation.username
+    Information.libcver
+    Information.arch
+    Information.uname
+    
+    """
+    return {
+        "cpus": os.cpu_count(),
+        "username": getpass.getuser(),
+        "arch": platform.architecture(),
+        "libcver": platform.libc_ver(),
+        'uname': platform.system()
+    }
 
 builtins = {
     "std": {
@@ -229,7 +289,9 @@ builtins = {
         "length": std_length,
         "multiply": std_multiply,
         "macro": std_macro,
-        "file": std_file
+        "file": std_file,
+        "info": std_info,
+        "exists": std_fexists
     }
 
 }
