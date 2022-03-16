@@ -193,6 +193,7 @@ def std_fclose(args, file):
 
 def std_file(args):
     fsile = open(args[0], args[1])
+    
     def loadwrite(args):
         std_fwrite(args, fsile)
     
