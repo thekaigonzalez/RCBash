@@ -1,0 +1,5 @@
+# length test
+
+std:println(len("Hello"));
+
+std:println(std:multiply(len("hello"), 4))

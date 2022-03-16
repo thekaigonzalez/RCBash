@@ -170,6 +170,12 @@ def std_bool(args):
     if args[0] == args[1]: return True
     else: return False
 
+def std_length(args):
+    return len(args[0])
+
+def std_multiply(args):
+    return args[0] * args[1]
+
 builtins = {
     "std": {
         "println": std_println,
@@ -185,7 +191,9 @@ builtins = {
         "cmp": std_cmp,
         "lib": std_loadlib,
         "input": std_input,
-        "bool": std_bool
+        "bool": std_bool,
+        "length": std_length,
+        "multiply": std_multiply
     }
 
 }

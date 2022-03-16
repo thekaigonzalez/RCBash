@@ -1,0 +1,3 @@
+# multiply
+
+std:println(std:multiply(2, 2));
