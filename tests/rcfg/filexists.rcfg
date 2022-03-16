@@ -1,0 +1,1 @@
+std:assert(std:exists('test.txt'));

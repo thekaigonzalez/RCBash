@@ -1,0 +1,6 @@
+# Copyright 2022 kaigonzalez
+
+info = std:info();
+
+std:println("Number of CPU Cores: ", info:cpus);
+std:println("Username: ", info:username);
