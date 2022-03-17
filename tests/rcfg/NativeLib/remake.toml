@@ -1,0 +1,6 @@
+
+[project] # PROJECT CATEGORY
+name = 'Sample Project' # name of your project.
+entry = "source/unit.recfg"
+libs = ["lib"] # Any External libraries such as ./lib or whatever.
+        

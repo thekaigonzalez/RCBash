@@ -1,0 +1,5 @@
+std:lib("nlib")
+
+@if recfg:linked() {
+    recfg:statstring("std:println('hello');");
+}
