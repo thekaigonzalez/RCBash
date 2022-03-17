@@ -39,6 +39,7 @@ from typing import List
 
 true = True
 false = False
+RCFGPATH=[]
 
 """ STD LIBRARY """
 def __stdprintln(args):
@@ -147,7 +148,10 @@ def __stdloadlib(args):
     
     """
     import importlib
+    prevsyspath = sys.path
+    sys.path = RCFGPATH
 
+    
     try:
 
         mod = importlib.import_module(args[0])
@@ -157,6 +161,7 @@ def __stdloadlib(args):
                 builtins[mod.NAME] = mod.rcfg_registers
     except Exception as e:
         print("std:lib - Failed to import library `" + args[0] + "'\nError Message: " + str(e))
+    sys.path = prevsyspath
 
 def __stdcmp(args):
     """
@@ -563,3 +568,6 @@ def __exec_rcfg(chu: str, rfv=False, debug=False):
     
 def rcfg_rstatstring(strn, ifd=False):
     __exec_rcfg(strn, debug=ifd)
+
+def rcfg_addmountable(name):
+    RCFGPATH.append(name)
