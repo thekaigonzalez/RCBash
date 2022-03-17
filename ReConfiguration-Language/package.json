@@ -1,0 +1,25 @@
+{
+    "name": "ReConfiguration-Language",
+    "displayName": "ReConfig",
+    "description": "ReConfig is a procedural/Object oriented language.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.65.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "recfg",
+            "aliases": ["ReConfiguration", "recfg"],
+            "extensions": [".recfg",".rcfg"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "recfg",
+            "scopeName": "source.rcfg",
+            "path": "./syntaxes/recfg.tmLanguage.json"
+        }]
+    }
+}

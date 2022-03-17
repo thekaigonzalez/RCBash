@@ -1,0 +1,44 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ReConfiguration",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#methods"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.recfg",
+				"match": "\\b(@if)\\b"
+			},
+			{
+				"name": "entity.name.class",
+				"match": "\\b(std)\\b"
+			},
+			{
+				"name": "entity.name.function",
+				"match": "\\b(std:println|std:assert|std:assertcmp|std:chunkit|std:add|std:string|std:string:sub|std:string:strip|std:cmp|std:lib|std:input|std:bool|std:length|std:multiply|std:macro|std:file|std:info|std:exists|std:assertnil|std:argv|std:member)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.recfg",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.recfg",
+					"match": "\\\\."
+				}
+			]
+		}
+		
+	},
+	"scopeName": "source.rcfg"
+}
