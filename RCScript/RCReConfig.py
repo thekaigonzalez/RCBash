@@ -28,6 +28,7 @@ Lexer:
 
 """
 import getpass
+from importlib.machinery import SourceFileLoader
 from platform import platform
 import platform
 import psutil
@@ -149,9 +150,7 @@ def __stdloadlib(args):
     """
     import importlib
     prevsyspath = sys.path
-    sys.path = RCFGPATH
     try:
-
 
         mod = importlib.import_module(args[0])
 
