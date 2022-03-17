@@ -57,29 +57,29 @@ if args.action == 'create':
         md = open(args.DIR + "README.md", "w")
         md.write(
     """
-    # ReConfig Project
+# ReConfig Project
 
-    This is a template ReConfig project. Put licenses, and everything in this directory. 
+This is a template ReConfig project. Put licenses, and everything in this directory. 
         
-    """)
+    """.strip())
         md.close()
 
         f = open(args.DIR + "source/main.recfg", "w")
         f.write(
     """
-    # This is your application
-    std:println("Hello!");
-    """)
+# This is your application
+std:println("Hello!");
+    """.strip())
         f.close()
 
         f = open(args.DIR + "remake.toml", "w")
         f.write(
     """
-    [project] # PROJECT CATEGORY
-    name = 'Sample Project' # name of your project.
-    entry = "source/main.recfg"
-    libs = [] # Any External libraries such as ./lib or whatever.
-    """)
+[project] # PROJECT CATEGORY
+name = 'Sample Project' # name of your project.
+entry = "source/main.recfg"
+libs = [] # Any External libraries such as ./lib or whatever.
+    """.strip())
         f.close()
     elif args.type == "library":
             os.mkdir(args.DIR)
@@ -92,7 +92,7 @@ if args.action == 'create':
 # ReConfig Project
 
 This is a template ReConfig Library project. Put licenses, and everything in this directory. 
-        """)
+        """.strip())
             md.close()
 
             f = open(args.DIR + "source/unit.recfg", "w")
@@ -101,17 +101,17 @@ This is a template ReConfig Library project. Put licenses, and everything in thi
 std:lib("yourlib")
 # This is your application
 yourlib:test("Hello!");
-        """)
+        """.strip())
             f.close()
 
             f = open(args.DIR + "remake.toml", "w")
             f.write(
         """
-        [project] # PROJECT CATEGORY
-        name = 'Sample Project' # name of your project.
-        entry = "source/unit.recfg"
-        libs = ["lib"] # Any External libraries such as ./lib or whatever.
-        """)
+[project] # PROJECT CATEGORY
+name = 'Sample Project' # name of your project.
+entry = "source/unit.recfg"
+libs = ["lib"] # Any External libraries such as ./lib or whatever.
+        """.strip())
             f.close()
             os.mkdir(args.DIR + "lib")
             file = open(args.DIR + "lib/mylib.py", 'w')
