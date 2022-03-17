@@ -402,12 +402,18 @@ def __exec_rcfg(chu: str, rfv=False, debug=False):
 
                 state = 1
                 vb = ""
+            elif char == '"' and state == 1:
+                state = 699699839381892
+                vb += char
+            elif char == '"' and state == 699699839381892:
+                state = 1
+                vb += char
 
             elif char == '(' and state == 1:
                 state += 10
                 vb += "("
 
-            elif char == '(' and state != 1 and state != 5 and state != 69 and state != 81 and state != 6722 and state != 672:
+            elif char == '(' and state != 1 and state != 5 and state != 69 and state != 81 and state != 6722 and state != 672 and state != 699699839381892:
                 if debug:
                     print("[LEXER] Adding 10 to state because of: " + char)
                 state += 10
@@ -454,7 +460,7 @@ def __exec_rcfg(chu: str, rfv=False, debug=False):
                 args = []
                 
 
-            elif char == ")" and state != 1 and state != 5 and state != 69 and state != 81 and state != 6722 and state != 672:
+            elif char == ")" and state != 1 and state != 5 and state != 69 and state != 81 and state != 6722 and state != 672 and state != 699699839381892:
                 if debug:
                     print("[LEXER] removing 10 from state because of " + char)
                 state -= 10
@@ -494,7 +500,10 @@ def __exec_rcfg(chu: str, rfv=False, debug=False):
             
             elif char == ';' or char == '\n' and state == 5 and not COLLECTING:
                 if debug: print("[STATEMENT] Found newline on state: " + str(state))
-                if COLLECTING:
+                if state == 699699839381892:
+                    vb += char
+                    
+                elif COLLECTING:
                     state = 6722
                     stch += char
                     
