@@ -152,6 +152,7 @@ def __stdloadlib(args):
     sys.path = RCFGPATH
     try:
 
+
         mod = importlib.import_module(args[0])
 
         if type(mod.rcfg_registers) == dict:
