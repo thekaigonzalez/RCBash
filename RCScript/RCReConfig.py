@@ -149,6 +149,9 @@ def __stdloadlib(args):
     
     """
     import importlib
+    prev = sys.path
+    sys.path = RCFGPATH
+    
     try:
 
         mod = importlib.import_module(args[0])
@@ -158,6 +161,7 @@ def __stdloadlib(args):
                 builtins[mod.NAME] = mod.rcfg_registers
     except Exception as e:
         print("std:lib - Failed to import library `" + args[0] + "'\nError Message: " + str(e))
+    sys.path = prev
 
 def __stdaddpath(args):
     """
