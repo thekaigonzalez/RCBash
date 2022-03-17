@@ -1,0 +1,96 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+import pathlib
+import sys
+import toml
+
+
+parser = argparse.ArgumentParser("remake")
+parser.description = """
+REMake has been the standard ReConfiguration Project builder for over a year,
+Containing everything you need to build ReConfig projects.
+"""
+
+parser.add_argument("DIR", help="The Directory to load the project from.")
+parser.add_argument("-lib", help="Link a ReConfig library to the application, this is optional if you have it on path.", default="PATH")
+parser.add_argument('-action', help="The action, by default it is create.", default="create")
+
+args = parser.parse_args()
+
+if not args.DIR.endswith('/'):
+    args.DIR += '/'
+
+if args.lib == "PATH":
+    try:
+        from RCScript.RCReConfig import rcfg_rstatstring
+    except NameError:
+        print("error: implementation does not support rcfg_rstatstring")
+        exit(-1)
+    except Exception:
+        print("error: failed loading implementation")    
+        exit(-1)
+else:
+    sys.path.append(args.lib)
+    try:
+        from RCScript.RCReConfig import rcfg_rstatstring
+    except Exception:
+        
+        print("error: issue loading your implementation from lib/. does RCScript/RCReConfig.py exist?")
+        exit(-1)
+
+if rcfg_rstatstring != None:
+    print("found implementation of rcfg_rstatstring()")
+else:
+    print("no implementation for rcfg_rstatstring()")
+    exit(-1)    
+
+if args.action == 'create':
+    print("creating ReConfig project...")
+    os.mkdir(args.DIR)
+    os.mkdir(args.DIR + "source")
+    
+    print("creating files...")
+    md = open(args.DIR + "README.md", "w")
+    md.write(
+"""
+# ReConfig Project
+
+This is a template ReConfig project. Put licenses, and everything in this directory. 
+    
+""")
+    md.close()
+
+    f = open(args.DIR + "source/main.recfg", "w")
+    f.write(
+"""
+# This is your application
+std:println("Hello!");
+""")
+    f.close()
+
+    f = open(args.DIR + "remake.toml", "w")
+    f.write(
+"""
+[project] # PROJECT CATEGORY
+name = 'Sample Project' # name of your project.
+entry = "source/main.recfg"
+libs = [] # Any External libraries such as ./lib or whatever.
+""")
+    f.close()
+elif args.action == "run":
+    print("loading project...")
+    if pathlib.Path(args.DIR + "remake.toml").exists():
+        
+        projfile = open(args.DIR + "remake.toml")
+        proj = toml.load(projfile)
+        print("Running " + proj["project"]['name'])
+
+        fileLoad = open(args.DIR + proj["project"]["entry"])
+        for i in proj["project"]["libs"]:
+            print("loading lib: " + i)
+            sys.path.append(args.DIR + i)
+        
+        rcfg_rstatstring(fileLoad.read())
+
