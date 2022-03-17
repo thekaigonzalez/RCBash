@@ -16,6 +16,7 @@ Containing everything you need to build ReConfig projects.
 parser.add_argument("DIR", help="The Directory to load the project from.")
 parser.add_argument("-lib", help="Link a ReConfig library to the application, this is optional if you have it on path.", default="PATH")
 parser.add_argument('-action', help="The action, by default it is create.", default="create")
+parser.add_argument("-type", help="The type of project you are creating (if create specified), available: library, app", default="app")
 
 args = parser.parse_args()
 
@@ -48,37 +49,74 @@ else:
 
 if args.action == 'create':
     print("creating ReConfig project...")
-    os.mkdir(args.DIR)
-    os.mkdir(args.DIR + "source")
-    
-    print("creating files...")
-    md = open(args.DIR + "README.md", "w")
-    md.write(
-"""
+    if args.type == "app":
+        os.mkdir(args.DIR)
+        os.mkdir(args.DIR + "source")
+        
+        print("creating files...")
+        md = open(args.DIR + "README.md", "w")
+        md.write(
+    """
+    # ReConfig Project
+
+    This is a template ReConfig project. Put licenses, and everything in this directory. 
+        
+    """)
+        md.close()
+
+        f = open(args.DIR + "source/main.recfg", "w")
+        f.write(
+    """
+    # This is your application
+    std:println("Hello!");
+    """)
+        f.close()
+
+        f = open(args.DIR + "remake.toml", "w")
+        f.write(
+    """
+    [project] # PROJECT CATEGORY
+    name = 'Sample Project' # name of your project.
+    entry = "source/main.recfg"
+    libs = [] # Any External libraries such as ./lib or whatever.
+    """)
+        f.close()
+    elif args.type == "library":
+            os.mkdir(args.DIR)
+            os.mkdir(args.DIR + "source")
+            
+            print("creating files...")
+            md = open(args.DIR + "README.md", "w")
+            md.write(
+        """
 # ReConfig Project
 
-This is a template ReConfig project. Put licenses, and everything in this directory. 
-    
-""")
-    md.close()
+This is a template ReConfig Library project. Put licenses, and everything in this directory. 
+        """)
+            md.close()
 
-    f = open(args.DIR + "source/main.recfg", "w")
-    f.write(
-"""
+            f = open(args.DIR + "source/unit.recfg", "w")
+            f.write(
+        """
+std:lib("yourlib")
 # This is your application
-std:println("Hello!");
-""")
-    f.close()
+yourlib:test("Hello!");
+        """)
+            f.close()
 
-    f = open(args.DIR + "remake.toml", "w")
-    f.write(
-"""
-[project] # PROJECT CATEGORY
-name = 'Sample Project' # name of your project.
-entry = "source/main.recfg"
-libs = [] # Any External libraries such as ./lib or whatever.
-""")
-    f.close()
+            f = open(args.DIR + "remake.toml", "w")
+            f.write(
+        """
+        [project] # PROJECT CATEGORY
+        name = 'Sample Project' # name of your project.
+        entry = "source/unit.recfg"
+        libs = ["lib"] # Any External libraries such as ./lib or whatever.
+        """)
+            f.close()
+            os.mkdir(args.DIR + "lib")
+            file = open(args.DIR + "lib/mylib.py", 'w')
+            file.write("# a test library\n\nNAME='sample lib'\nTYPE='full-lib'\nrcfg_registers = {}")
+            file.close()
 elif args.action == "run":
     print("loading project...")
     if pathlib.Path(args.DIR + "remake.toml").exists():
