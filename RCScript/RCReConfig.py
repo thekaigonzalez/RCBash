@@ -306,7 +306,8 @@ builtins = {
         "exists": __stdfexists,
         "assertnil": __stdassertnil,
         "argv": sys.argv,
-        "member": __stdmember
+        "member": __stdmember,
+        "exit": __stdexit
     },
     "not": __not
 
