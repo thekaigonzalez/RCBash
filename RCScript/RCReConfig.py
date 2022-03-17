@@ -150,8 +150,6 @@ def __stdloadlib(args):
     import importlib
     prevsyspath = sys.path
     sys.path = RCFGPATH
-
-    
     try:
 
         mod = importlib.import_module(args[0])
@@ -163,6 +161,14 @@ def __stdloadlib(args):
         print("std:lib - Failed to import library `" + args[0] + "'\nError Message: " + str(e))
     sys.path = prevsyspath
 
+def __stdaddpath(args):
+    """
+    std:addpath(pathname) - ReConfiguration Standard Library
+
+    Adds "pathname" to virtual path. Used for std:lib candidate.
+
+    """
+    RCFGPATH.append(args[0])
 def __stdcmp(args):
     """
     std:cmp(one, two, func, ...) - ReConfiguration Standard Library
@@ -289,6 +295,7 @@ def __not(args):
 
 builtins = {
     "std": {
+        "addpath": __stdaddpath,
         "println": __stdprintln,
         "VERSION": '0.7',
         "assert": __stdassert,

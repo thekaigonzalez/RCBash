@@ -26,8 +26,9 @@ if not args.DIR.endswith('/'):
 if args.lib == "PATH":
     try:
         from RCScript.RCReConfig import rcfg_rstatstring
+        from RCScript.RCReConfig import rcfg_addmountable
     except NameError:
-        print("error: implementation does not support rcfg_rstatstring")
+        print("error: implementation does not support rcfg_rstatstring()\nerror: implementation does not support rcfg_addmountable()")
         exit(-1)
     except Exception:
         print("error: failed loading implementation")    
@@ -36,13 +37,14 @@ else:
     sys.path.append(args.lib)
     try:
         from RCScript.RCReConfig import rcfg_rstatstring
+        from RCScript.RCReConfig import rcfg_addmountable
     except Exception:
         
         print("error: issue loading your implementation from lib/. does RCScript/RCReConfig.py exist?")
         exit(-1)
 
 if rcfg_rstatstring != None:
-    print("found implementation of rcfg_rstatstring()")
+    print("found implementation of rcfg_rstatstring()\nfound implementation for rcfg_addmountable()")
 else:
     print("no implementation for rcfg_rstatstring()")
     exit(-1)    
@@ -128,7 +130,7 @@ elif args.action == "run":
         fileLoad = open(args.DIR + proj["project"]["entry"])
         for i in proj["project"]["libs"]:
             print("loading lib: " + i)
-            sys.path.append(args.DIR + i)
+            rcfg_addmountable(args.DIR + i)
         
         rcfg_rstatstring(fileLoad.read())
 
