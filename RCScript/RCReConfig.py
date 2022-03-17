@@ -285,7 +285,7 @@ def __not(args):
 builtins = {
     "std": {
         "println": __stdprintln,
-        "VERSION": '0.1',
+        "VERSION": '0.7',
         "assert": __stdassert,
         "assertcmp": __stdassertcmp,
         "chunkit": __stdchunkit,
