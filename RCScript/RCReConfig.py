@@ -295,6 +295,8 @@ def __stdexit(args):
 def __not(args):
     return args[0] == False
 
+def __define(args):
+    builtins[args[0]] = args[1]
 builtins = {
     "std": {
         "addpath": __stdaddpath,
@@ -323,7 +325,8 @@ builtins = {
         "member": __stdmember,
         "exit": __stdexit
     },
-    "not": __not
+    "not": __not,
+    "define": __define
 
 }
 

@@ -1,0 +1,3 @@
+define("Hello", "2")
+
+std:println(Hello)
