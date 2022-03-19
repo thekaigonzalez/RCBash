@@ -1,0 +1,3 @@
+# main method in other file
+
+std:println("Hello from test_import.rcfg!");

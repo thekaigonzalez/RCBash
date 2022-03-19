@@ -293,10 +293,18 @@ def __stdexit(args):
     exit(args[0])
 
 def __not(args):
+    """ Test for value not true """
     return args[0] == False
 
 def __define(args):
+    """ Define a variable dynamically"""
     builtins[args[0]] = args[1]
+
+def __import(args):
+    """ import an entire chunk from another file (builtin) """
+    file = open(args[0], "r");
+
+    __exec_rcfg(file.read());
 builtins = {
     "std": {
         "addpath": __stdaddpath,
@@ -326,8 +334,8 @@ builtins = {
         "exit": __stdexit
     },
     "not": __not,
-    "define": __define
-
+    "define": __define,
+    "import": __import
 }
 
 def __rcfg_absd(c):
