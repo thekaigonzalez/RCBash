@@ -24,7 +24,7 @@
 			},
 			{
 				"name": "entity.name.function",
-				"match": "\\b(not|define|import)\\b"
+				"match": "\\b(not|define|import|len)\\b"
 			},
 			{
 				"name": "comment.line",
