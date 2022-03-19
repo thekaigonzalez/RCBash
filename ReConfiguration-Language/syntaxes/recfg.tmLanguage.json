@@ -24,7 +24,7 @@
 			},
 			{
 				"name": "entity.name.function",
-				"match": "\\b(std:println|std:assert|std:assertcmp|std:chunkit|std:add|std:string|std:string:sub|std:string:strip|std:cmp|std:lib|std:input|std:bool|std:length|std:multiply|std:macro|std:file|std:info|std:exists|std:assertnil|std:argv|std:member)\\b"
+				"match": "\\b(not|define|import)\\b"
 			},
 			{
 				"name": "comment.line",
