@@ -15,9 +15,9 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-# RCBash
+# RC
 
-RCBash is a UNIX-based platform command processor.
+RC is a toolchain containing many language experiments and implementations.
 
 ## Meaning
 
