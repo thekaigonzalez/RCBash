@@ -19,6 +19,8 @@ import subprocess
 import platform
 import os
 
+context = "None"
+
 def xxd(arg):
     b = ' '.join(format(ord(x), 'b') for x in ' '.join(arg[1]))
     print(b)
@@ -52,7 +54,7 @@ uservars = lexer.uservars
 
 def eval_rc(code):
     ast = lexer.dictionary_ofrc(code)
-    
+    global context
     for item in ast:
         # print("iterate")
         if type(item) == str: break;
@@ -101,7 +103,8 @@ def eval_rc(code):
                     return os.getcwd()
             except Exception:
                 print("build-core: exception")
-            if uservars.get(arg[0].strip()) != None:
+            if uservars.get(arg[0].strip()) != None and context != "alias":
+                context = "alias"
                 arg[0] = eval_rc(uservars[arg[0]] + " " + " ".join(arg[1:]))
                 break;
             if builta.get(arg[0].strip()) != None:
@@ -117,3 +120,4 @@ def eval_rc(code):
                     return subprocess.call(arg)
                 except Exception as e:
                     print("error: rcbash: command not found: " + str(e))
+            context = "None"
