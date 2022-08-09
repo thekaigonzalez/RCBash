@@ -67,11 +67,14 @@ def dictionary_ofrc(stri):
         elif char == "#" and state == 0: return "comment"
         
         elif char == '&' and state == 10:
-            if (stri[i+1] == '&'):
+            if (len(stri) < i+2):
+                print("rcbash: error: expected <expr>, got `&'")
+                break
+            elif (stri[i+1] == '&'):
                 return print("error: lexer: 'bash-like features' are not supported (key '&&')")
             stat_dict[stat_level] = {}
             stat_dict[stat_level]['args'] = args
-
+            
             # print(stat_dict)
             
             state = 0
@@ -108,6 +111,5 @@ def dictionary_ofrc(stri):
     # print(stat_dict)
     # print(args[1])
     # print(stat_dict)
-
     return stat_dict
 
