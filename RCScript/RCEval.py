@@ -59,14 +59,11 @@ def eval_rc(code):
         # print("iterate")
         if type(item) == str: break;
         if (ast[item] != None):
-            
-            
-
             built = False
             arg = ast[item]['args']
-            if arg[0].startswith("&"): # reference
-                if uservars.get(arg[0][1:]):
-                    arg[0] = uservars.get(arg[0][1:])
+            #if arg[0].startswith("&"): # reference
+            #    if uservars.get(arg[0][1:]):
+            #        arg[0] = uservars.get(arg[0][1:])
             try:
                 if (arg[0] == 'exit'):
                     quit(-1)
