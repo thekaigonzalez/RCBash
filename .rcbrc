@@ -21,6 +21,7 @@ set c-compiler "gcc"
 set clang-c "clang"
 set CC "gcc"
 
+# A color command
 set fc "fcolor"
 
 # Agent (REQUIRED)
