@@ -76,6 +76,13 @@ def eval_rc(code):
                     if (len(arg) > 2):
                         uservars[arg[1]] = arg[2]
                     built = True
+                elif arg[0] == 'include':
+                    if len(arg) >= 2:
+                        in_file = open(arg[1], "r")
+                        for l in in_file.readlines():
+                            eval_rc(l.strip())
+                    built = True
+                        
                 elif arg[0] == 'cd':
                     
                     if (len(arg) > 1):
@@ -109,7 +116,7 @@ def eval_rc(code):
                     builta[arg[0]](arg)
                 except Exception as e:
                     print("builtin-core: error")
-                    # print(str(e))
+                    print(str(e))
                 break;
             # print(arg)
             if not built:
