@@ -38,11 +38,9 @@ set lla "ls -la"
 # typos
 set cd.. "cd .."
 
-# minifiers
-set upgrade "sudo pacman -Sy"
-set upgade "sudo pacman -Sy"
-set plinst "sudo PluginManage -install"
-set plrm "sudo PluginManage -remove"
+set pinstall "sudo PluginManage -install"
+set premove "sudo PluginManage -remove"
+
 # default shell (set)
 set shell /bin/bash
 
