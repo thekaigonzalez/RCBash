@@ -1,4 +1,5 @@
 __pycache__
 .first_time_login
+.vscode
 #.rcbrc optionally your RC file
 cache
