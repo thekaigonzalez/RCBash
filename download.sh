@@ -12,4 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 chmod +x Software/*/*
-cp Software/*/* /usr/local/bin/
+cp Software/*/* /usr/local/bin/rcbin
