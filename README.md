@@ -25,3 +25,7 @@ RCBash (RC Bash) (RC Bourne Again Shell) (Modular Bourne Again Shell)
 
 Modular Bourne Again SHell is a completely modular shell application with a system of manuals,
 software, and other things.
+
+## `rcc`
+
+To install the base language toolchain, please use [rcc](https://codeberg.org/thatkaigonzalez/rcc)
