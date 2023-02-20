@@ -15,7 +15,6 @@
 
 import RCScript.RCLexer as lexer
 import subprocess
-# import psutil
 import platform
 import os
 
